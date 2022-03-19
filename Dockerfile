@@ -25,7 +25,9 @@ WORKDIR /var/www/apapaya
 COPY . /var/www/apapaya
 RUN rm -rf /var/www/apapaya/node_modules
 
-RUN chmod -R 777 /var/www/apapaya
+RUN chmod -R 755 /var/www/apapaya
+RUN usermod -u 1000 www-data
+RUN chown -R 1000:1000 /var/www/apapaya
 
 RUN /usr/bin/composer install
 

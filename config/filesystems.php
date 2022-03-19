@@ -36,6 +36,12 @@ return [
             'throw' => false,
         ],
 
+        'papaya' => [
+            'driver' => 'local',
+            'root' => '/home/papaya/storage',
+            'throw' => false
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

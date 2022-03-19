@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Look;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LooksController extends Controller
 {
@@ -24,13 +25,19 @@ class LooksController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $look = Look::create([
+            'name' => $request['name'],
+            'slug' => Str::slug($request['name']),
+            'image' => $request['image']->store('papaya', 'looks')
+        ]);
+
+        return redirect()->route('admin.looks.index');
     }
 
 
     public function show(Look $look)
     {
-        //
+        return view('admin.looks.show', compact('look'));
     }
 
 
