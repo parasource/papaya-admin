@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +18,38 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("admin.index");
+});
+
+Auth::routes();
+
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.',
+    'middleware' => ['auth']
+], function() {
+
+    Route::get("/", [HomeController::class, 'index'])->name('index');
+
+    Route::resource("looks", LooksController::class);
+    Route::group([
+        'prefix' => 'looks',
+        'as' => 'looks.'
+    ], function() {
+
+        Route::group([
+            'prefix' => 'categories',
+            'as' => 'categories.'
+        ], function() {
+
+            Route::get("/", [])->name('index');
+        });
+
+//        Route::get("/", [LooksController::class, 'index'])->name('index');
+//        Route::resource("", LooksController::class);
+
+    });
+
+    Route::resource("/users", UsersController::class);
+
 });
