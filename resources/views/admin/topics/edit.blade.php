@@ -1,0 +1,39 @@
+@extends('layouts.app')
+
+@section('content')
+
+    @include('admin._nav', ['route' => 'topics'])
+
+    <form action="{{ route('admin.topics.update', $topic) }}" enctype="multipart/form-data" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="card mb-3">
+            <div class="card-header">
+                Общие сведения
+            </div>
+            <div class="card-body pb-2">
+
+                <div class="form-group">
+                    <label for="name" class="col-form-label">Название</label>
+                    <input id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $topic->name) }}" required>
+                    @error('name')
+                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-form-label">Описание</label>
+                    <textarea id="desc" class="form-control @error('desc') is-invalid @enderror" name="desc" rows="10" required>{{ old('desc', $topic->desc) }}</textarea>
+                    @error('desc')
+                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success">Сохранить</button>
+            </div>
+        </div>
+    </form>
+
+@endsection

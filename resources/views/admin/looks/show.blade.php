@@ -25,7 +25,13 @@
             <th>Slug</th><td>{{ $look->slug }}</td>
         </tr>
         <tr>
-            <th>Картинка</th><td>{{ \Storage::disk('public')->url($look->image) }}</td>
+            <th>Описание</th><td>{{ $look->desc }}</td>
+        </tr>
+        <tr>
+            <th>Картинка</th>
+            <td>
+                <img src="{{ \Storage::disk('public')->url($look->image) }}" alt="">
+            </td>
         </tr>
         <tbody>
         </tbody>

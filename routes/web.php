@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\TopicsController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,22 @@ Route::group([
 
             Route::get("/", [])->name('index');
         });
+
+//        Route::get("/", [LooksController::class, 'index'])->name('index');
+//        Route::resource("", LooksController::class);
+
+    });
+
+
+    Route::resource("topics", TopicsController::class);
+    Route::group([
+        'prefix' => 'topics',
+        'as' => 'topics.'
+    ], function() {
+
+        Route::POST("/{topic}/remove-look/{look}", [TopicsController::class, 'removeLook'])->name('remove-look');
+        Route::get("/{topic}/add-look", [TopicsController::class, 'addLook'])->name('add-look');
+        Route::POST("/{topic}/add-look/{look}", [TopicsController::class, 'putLook'])->name('put-look');
 
 //        Route::get("/", [LooksController::class, 'index'])->name('index');
 //        Route::resource("", LooksController::class);

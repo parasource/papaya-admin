@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.0-fpm-alpine
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -26,8 +26,8 @@ COPY . /var/www/apapaya
 RUN rm -rf /var/www/apapaya/node_modules
 
 RUN chmod -R 755 /var/www/apapaya
-RUN usermod -u 1000 www-data
-RUN chown -R 1000:1000 /var/www/apapaya
+#RUN usermod -u 1000 www-data
+#RUN chown -R 1000:1000 /var/www/apapaya
 
 RUN /usr/bin/composer install
 
