@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LooksController;
 use App\Http\Controllers\Admin\TopicsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\WardrobeCategoriesController;
+use App\Http\Controllers\Admin\WardrobeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +68,9 @@ Route::group([
 //        Route::resource("", LooksController::class);
 
     });
+
+    Route::resource("/wardrobe-items", WardrobeController::class);
+    Route::resource('/wardrobe-categories', WardrobeCategoriesController::class);
 
     Route::resource("/users", UsersController::class);
 
