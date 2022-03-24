@@ -11,9 +11,21 @@ use Illuminate\Support\Str;
 class LooksController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $looks = Look::whereNull('deleted_at')->orderBy('id', 'desc')->paginate(20);
+        $query = Look::whereNull('deleted_at')->orderBy('id', 'desc');
+
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', 'like', '%' . $value . '%');
+        }
+        if (!empty($value = $request->get('desc'))) {
+            $query->where('desc', 'like', '%' . $value . '%');
+        }
+        $looks = $query->paginate(20);
+
         return view('admin.looks.index', compact('looks'));
     }
 

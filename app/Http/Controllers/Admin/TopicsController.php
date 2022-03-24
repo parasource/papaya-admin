@@ -72,15 +72,37 @@ class TopicsController extends Controller
     }
 
 
-    public function addLook(Topic $topic) {
+    public function addLook(Request $request, Topic $topic) {
 
+        $ids = $topic->looks()->whereNull('deleted_at')->pluck('id')->toArray();
+        $query = Look::whereNull('deleted_at')->whereNotIn('id', $ids)->orderBy('id', 'desc');
+
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', 'like', '%' . $value . '%');
+        }
+
+        if (!empty($value = $request->get('desc'))) {
+            $query->where('desc', 'like', '%' . $value . '%');
+        }
+
+        $looks = $query->paginate(20);
+
+        return view('admin.topics.add-look', compact('topic', 'looks'));
     }
 
     public function putLook(Topic $topic, Look $look) {
+        $topic->looks()->attach($look->id);
 
+        return redirect()->back();
     }
 
     public function removeLook(Topic $topic, Look $look) {
+        $topic->looks()->detach($look->id);
 
+        return redirect()->back();
     }
 }

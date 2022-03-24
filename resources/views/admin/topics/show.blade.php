@@ -55,7 +55,10 @@
                         <td>{{ $look->desc }}</td>
                         <td>{{ $topic->created_at->format('d-m-Y') }}</td>
                         <td>
-                            <a href="{{ route('admin.topics.remove-look', compact('topic', 'look')) }}" class="btn btn-danger">X</a>
+                            <form action="{{ route('admin.topics.remove-look', compact('topic', 'look')) }}" method="post">
+                                @csrf
+                                <button class="btn btn-danger">X</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

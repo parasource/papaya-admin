@@ -2,12 +2,9 @@
 
 @section('content')
 
-    @include('admin._nav', ['route' => 'looks'])
+    @include('admin._nav', ['route' => 'topics'])
 
-    <div class="my-3">
-        <a href="{{ route('admin.looks.categories.index') }}" class="btn btn-primary">Категории</a>
-        <a href="{{ route('admin.looks.create') }}" class="btn btn-success">Добавить лук</a>
-    </div>
+    <h3>{{ $topic->name }}</h3>
 
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>
@@ -52,6 +49,7 @@
             <th>Описание</th>
             <th>Картинка</th>
             <th>Создан</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -64,6 +62,12 @@
                 <td>{{ $look->desc }}</td>
                 <td>{{ $look->image }}</td>
                 <td>{{ $look->created_at->format('d-m-Y') }}</td>
+                <td>
+                    <form action="{{ route('admin.topics.put-look', compact('topic', 'look')) }}" method="post">
+                        @csrf
+                        <button class="btn btn-success">+</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
 
