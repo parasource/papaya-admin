@@ -5,72 +5,56 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\WardrobeCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class WardrobeCategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $categories = WardrobeCategory::all();
+
+        return view('admin.wardrobe-categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('admin.wardrobe-categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $wardrobeCategory = WardrobeCategory::create([
+           'name' => $request['name'],
+           'slug' => Str::slug($request['name'])
+        ]);
+
+        return redirect()->route('admin.wardrobe-categories.show', $wardrobeCategory);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\WardrobeCategory  $wardrobeCategory
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(WardrobeCategory $wardrobeCategory)
     {
-        //
+        return view('admin.wardrobe-categories.show', compact('wardrobeCategory'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\WardrobeCategory  $wardrobeCategory
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(WardrobeCategory $wardrobeCategory)
     {
-        //
+        return view('admin.wardrobe-categories.edit', compact('wardrobeCategory'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\WardrobeCategory  $wardrobeCategory
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, WardrobeCategory $wardrobeCategory)
     {
-        //
+        $wardrobeCategory->update([
+            'name' => $request['name'],
+            'slug' => Str::slug($request['name'])
+        ]);
+
+        return redirect()->route('admin.wardrobe-categories.show', $wardrobeCategory);
     }
 
     /**
