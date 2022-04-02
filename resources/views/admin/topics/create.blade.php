@@ -23,8 +23,18 @@
 
                 <div class="form-group">
                     <label for="desc" class="col-form-label">Описание</label>
-                    <textarea id="desc" class="form-control @error('desc') is-invalid @enderror" name="desc" rows="10" required>{{ old('desc') }}</textarea>
+                    <textarea id="desc" class="form-control @error('desc') is-invalid @enderror" name="desc" rows="10"
+                              required>{{ old('desc') }}</textarea>
                     @error('desc')
+                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="image" class="col-form-label">Превью</label>
+                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror"
+                           name="image">
+                    @error('image')
                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>

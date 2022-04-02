@@ -32,6 +32,7 @@ class TopicsController extends Controller
             'name' => $request['name'],
             'slug' => Str::slug($request['name']."-".\Date::now()->format("d-m-Y")),
             'desc' => $request['desc'],
+            'image' => $request['image']->store('topics', 'public')
         ]);
 
         return redirect()->route('admin.topics.show', $topic);
@@ -54,9 +55,15 @@ class TopicsController extends Controller
     {
         $topic->update([
             'name' => $request['name'],
-            'slug' => Str::slug($request['name']."-".\Date::now()->format("d-m-Y")),
+            'slug' => Str::slug($request['name'] . "-" . \Date::now()->format("d-m-Y")),
             'desc' => $request['desc'],
         ]);
+
+        if ($request['image']) {
+            $topic->update([
+                'image' => $request['image']->store('topics', 'public')
+            ]);
+        }
 
         return redirect()->route('admin.topics.show', $topic);
     }
