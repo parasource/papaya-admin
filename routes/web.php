@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LooksController;
 use App\Http\Controllers\Admin\TopicsController;
@@ -34,7 +35,6 @@ Route::group([
 
     Route::get("/", [HomeController::class, 'index'])->name('index');
 
-    Route::resource("looks", LooksController::class);
     Route::group([
         'prefix' => 'looks',
         'as' => 'looks.'
@@ -43,16 +43,18 @@ Route::group([
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
-        ], function() {
+        ], function () {
 
-            Route::get("/", [])->name('index');
+//            Route::get("/", [CategoriesController::class, 'index'])->name('index');
+
         });
+        Route::resource('categories', CategoriesController::class);
 
 //        Route::get("/", [LooksController::class, 'index'])->name('index');
 //        Route::resource("", LooksController::class);
 
     });
-
+    Route::resource("looks", LooksController::class);
 
     Route::resource("topics", TopicsController::class);
     Route::group([

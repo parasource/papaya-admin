@@ -32,12 +32,25 @@
 
                 <div class="form-group">
                     <label for="image" class="col-form-label">Картинка</label>
-                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror" name="image">
+                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror"
+                           name="image">
                     @error('image')
                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
+
+                <div class="form-group my-3">
+                    <label for="categories" class="col-form-label">Категории</label>
+                    <select class="form-select" multiple name="categories[]" id="categories">
+                        @foreach($categories as $category)
+                            <option
+                                value="{{ $category->id }}" {{ $look->categories()->where('id', $category->id)->exists()? 'selected': '' }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
             </div>
+
             <div class="card-footer">
                 <button class="btn btn-success">Сохранить</button>
             </div>

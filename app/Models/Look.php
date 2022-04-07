@@ -18,7 +18,13 @@ class Look extends Model
     public $timestamps = true;
 
 
-    public function topics() {
+    public function topics()
+    {
         return $this->belongsToMany(Look::class, 'topic_looks', 'look_id', 'topic_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Look::class, 'look_categories', 'look_id', 'category_id');
     }
 }

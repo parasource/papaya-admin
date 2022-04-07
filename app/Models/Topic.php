@@ -12,7 +12,7 @@ class Topic extends Model
     protected $table = 'topics';
 
     protected $fillable = [
-        'name', 'slug', 'desc', 'created_at', 'updated_at', 'deleted_at'
+        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     public $timestamps = true;
