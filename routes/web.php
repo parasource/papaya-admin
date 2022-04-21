@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ItemURLsController;
 use App\Http\Controllers\Admin\LooksController;
 use App\Http\Controllers\Admin\TopicsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -56,11 +58,27 @@ Route::group([
     });
     Route::resource("looks", LooksController::class);
 
-    Route::resource("topics", TopicsController::class);
+
+    Route::group([
+        'prefix' => 'brands',
+        'as' => 'brands.'
+    ], function () {
+
+    });
+    Route::resource("brands", BrandsController::class);
+
+    Route::group([
+        'prefix' => 'urls',
+        'as' => 'urls.'
+    ], function () {
+
+    });
+    Route::resource("urls", ItemURLsController::class);
+
     Route::group([
         'prefix' => 'topics',
         'as' => 'topics.'
-    ], function() {
+    ], function () {
 
         Route::POST("/{topic}/remove-look/{look}", [TopicsController::class, 'removeLook'])->name('remove-look');
         Route::get("/{topic}/add-look", [TopicsController::class, 'addLook'])->name('add-look');
@@ -70,6 +88,7 @@ Route::group([
 //        Route::resource("", LooksController::class);
 
     });
+    Route::resource("topics", TopicsController::class);
 
     Route::resource("/wardrobe-items", WardrobeController::class);
     Route::resource('/wardrobe-categories', WardrobeCategoriesController::class);

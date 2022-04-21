@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Look;
+use App\Services\Adviser;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -12,6 +13,12 @@ use Illuminate\Support\Str;
 
 class LooksController extends Controller
 {
+    private $adviser;
+
+    public function __construct(Adviser $adviser)
+    {
+        $this->adviser = $adviser;
+    }
 
     public function index(Request $request)
     {
@@ -43,7 +50,7 @@ class LooksController extends Controller
     {
         $look = null;
 
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request, $look) {
             $look = Look::create([
                 'name' => $request['name'],
                 'slug' => Str::slug($request['name']),
@@ -53,9 +60,14 @@ class LooksController extends Controller
             foreach ($request['categories'] as $id) {
                 $look->categories()->attach($id);
             }
+
+            $this->adviser->storeItem($look, $request['categories']);
+
+            return redirect()->route('admin.looks.show', $look);
         });
 
-        return redirect()->route('admin.looks.index', $look);
+
+        return redirect()->route('admin.looks.index');
     }
 
 
@@ -95,9 +107,11 @@ class LooksController extends Controller
             foreach ($request['categories'] as $id) {
                 $look->categories()->attach($id);
             }
-        });
 
-        return redirect()->route('admin.looks.show', $look);
+            $this->adviser->storeItem($look, $request['categories']);
+
+            return redirect()->route('admin.looks.show', $look);
+        });
     }
 
 
