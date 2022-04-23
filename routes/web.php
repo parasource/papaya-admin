@@ -68,14 +68,6 @@ Route::group([
     Route::resource("brands", BrandsController::class);
 
     Route::group([
-        'prefix' => 'urls',
-        'as' => 'urls.'
-    ], function () {
-
-    });
-    Route::resource("urls", ItemURLsController::class);
-
-    Route::group([
         'prefix' => 'topics',
         'as' => 'topics.'
     ], function () {
@@ -90,7 +82,17 @@ Route::group([
     });
     Route::resource("topics", TopicsController::class);
 
-    Route::resource("/wardrobe-items", WardrobeController::class);
+    Route::group([
+        'prefix' => 'wardrobe-items',
+        'as' => 'wardrobe-items.'
+    ], function () {
+
+        Route::post('/{item}/urls/{url}/remove', [WardrobeController::class, 'removeUrl'])->name('urls.remove');
+        Route::get('/{item}/urls/add', [WardrobeController::class, 'addUrlView'])->name('urls.add');
+        Route::post('/{item}/urls/add', [WardrobeController::class, 'addUrl'])->name('urls.add');
+
+    });
+    Route::resource("/wardrobe-items", WardrobeController::class)->parameters(['wardrobe-items' => 'item']);
     Route::resource('/wardrobe-categories', WardrobeCategoriesController::class);
 
     Route::resource("/users", UsersController::class);

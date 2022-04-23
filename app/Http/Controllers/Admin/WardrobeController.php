@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\ItemURL;
 use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use Illuminate\Http\Request;
@@ -39,16 +41,16 @@ class WardrobeController extends Controller
     }
 
 
-    public function show(WardrobeItem $wardrobeItem)
+    public function show(WardrobeItem $item)
     {
-        return view('admin.wardrobe-items.show', compact('wardrobeItem'));
+        return view('admin.wardrobe-items.show', compact('item'));
     }
 
 
-    public function edit(WardrobeItem $wardrobeItem)
+    public function edit(WardrobeItem $item)
     {
         $categories = WardrobeCategory::all();
-        return view('admin.wardrobe-items.edit', compact('wardrobeItem', 'categories'));
+        return view('admin.wardrobe-items.edit', compact('item', 'categories'));
     }
 
 
@@ -71,8 +73,34 @@ class WardrobeController extends Controller
     }
 
 
-    public function destroy(WardrobeItem $wardrobeItem)
+    public function destroy(WardrobeItem $item)
     {
         //
+    }
+
+    /////////////
+    // URLS
+
+    public function addUrlView(WardrobeItem $item)
+    {
+        $brands = Brand::all();
+        return view('admin.wardrobe-items.add-url', compact('item', 'brands'));
+    }
+
+    public function addUrl(Request $request, WardrobeItem $item)
+    {
+        $item->urls()->create([
+            'brand_id' => $request['brand_id'],
+            'url' => $request['url']
+        ]);
+
+        return redirect()->route('admin.wardrobe-items.show', $item);
+    }
+
+    public function removeUrl(WardrobeItem $item, ItemURL $url)
+    {
+        $url->delete();
+
+        return redirect()->back();
     }
 }

@@ -17,8 +17,14 @@ class WardrobeItem extends Model
 
     public $timestamps = false;
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(WardrobeCategory::class, 'wardrobe_category_id', 'id');
+    }
+
+    public function urls()
+    {
+        return $this->hasMany(ItemURL::class, 'item_id');
     }
 
 }

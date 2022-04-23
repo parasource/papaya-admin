@@ -4,7 +4,7 @@
 
     @include('admin._nav', ['route' => 'wardrobe'])
 
-    <form action="{{ route('admin.wardrobe-items.update', $wardrobeItem) }}" enctype="multipart/form-data" method="POST">
+    <form action="{{ route('admin.wardrobe-items.update', $item) }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
 
@@ -18,14 +18,16 @@
                     <label for="category_id">Категория</label>
                     <select class="form-control" name="category_id" id="category_id">
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category', $wardrobeItem->wardrobe_category_id) == $category->id? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option
+                                value="{{ $category->id }}" {{ old('category', $item->wardrobe_category_id) == $category->id? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="name" class="col-form-label">Название</label>
-                    <input id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $wardrobeItem->name) }}" required>
+                    <input id="name" class="form-control @error('name') is-invalid @enderror" name="name"
+                           value="{{ old('name', $item->name) }}" required>
                     @error('name')
                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
@@ -33,7 +35,8 @@
 
                 <div class="form-group my-3">
                     <label for="image" class="col-form-label">Картинка</label>
-                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror" name="image">
+                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror"
+                           name="image">
                     @error('image')
                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
