@@ -95,6 +95,7 @@ Route::group([
     Route::resource("/wardrobe-items", WardrobeController::class)->parameters(['wardrobe-items' => 'item']);
     Route::resource('/wardrobe-categories', WardrobeCategoriesController::class);
 
-    Route::resource("/users", UsersController::class);
+
+    Route::resource("users", UsersController::class);
 
 });
