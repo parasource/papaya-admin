@@ -22,19 +22,60 @@
             <th>Название</th><td>{{ $look->name }}</td>
         </tr>
         <tr>
-            <th>Slug</th><td>{{ $look->slug }}</td>
+            <th>Slug</th>
+            <td>{{ $look->slug }}</td>
         </tr>
         <tr>
-            <th>Описание</th><td>{{ $look->desc }}</td>
+            <th>Описание</th>
+            <td>{{ $look->desc }}</td>
         </tr>
         <tr>
             <th>Картинка</th>
             <td>
-                <img src="{{ \Storage::disk('public')->url($look->image) }}" alt="">
+                <img height="450" src="{{ \Storage::disk('public')->url($look->image) }}" alt="">
             </td>
         </tr>
         <tbody>
         </tbody>
     </table>
+
+    <div class="card">
+        <div class="card-header">Айтемы</div>
+        <div class="card-body">
+            <div class="my-3">
+                <a href="{{ route('admin.looks.items-add', $look) }}" class="btn btn-success">Прикрепить айтем</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Картинка</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach ($look->items as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td><a href="{{ route('admin.looks.show', $item) }}">{{ $item->name }}</a></td>
+                        <td>
+                            <img height="150" src="{{ Storage::disk('public')->url($item->image) }}" alt="">
+                        </td>
+                        <td>
+                            <form action="{{ route('admin.looks.items.remove', compact('look', 'item')) }}"
+                                  method="post">
+                                @csrf
+                                <button class="btn btn-danger">X</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 @endsection

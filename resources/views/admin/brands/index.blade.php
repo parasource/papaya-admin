@@ -4,7 +4,7 @@
     @include('admin._nav', ['route' => 'brands'])
 
     <div class="my-3">
-        <a href="{{ route('admin.topics.create') }}" class="btn btn-success">Добавить тему</a>
+        <a href="{{ route('admin.brands.create') }}" class="btn btn-success">Добавить бренд</a>
     </div>
 
     <table class="table table-striped">

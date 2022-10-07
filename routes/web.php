@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ItemURLsController;
 use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\TopicsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WardrobeCategoriesController;
@@ -48,12 +49,12 @@ Route::group([
         ], function () {
 
 //            Route::get("/", [CategoriesController::class, 'index'])->name('index');
-
         });
         Route::resource('categories', CategoriesController::class);
 
-//        Route::get("/", [LooksController::class, 'index'])->name('index');
-//        Route::resource("", LooksController::class);
+        Route::get('/{look}/items-add', [LooksController::class, 'addItems'])->name('items-add');
+        Route::post('/{look}/items-add/{item}', [LooksController::class, 'addItem'])->name('items.add');
+        Route::post('/{look}/items-remove/{item}', [LooksController::class, 'removeItem'])->name('items.remove');
 
     });
     Route::resource("looks", LooksController::class);
