@@ -30,6 +30,6 @@ RUN chmod -R 755 /var/www
 RUN usermod -u 1000 www-data
 RUN chown -R 1000:1000 /var/www
 
-RUN /usr/bin/composer install
+RUN /usr/bin/composer install --ignore-platform-req=ext-http
 
 #ENTRYPOINT ["/var/www/apapaya/migrate.sh"]

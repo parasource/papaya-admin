@@ -25,6 +25,7 @@ class Adviser
                 'Categories' => $categories,
                 'IsHidden' => false,
                 'ItemID' => "$look->id",
+                'Season' => $look->season,
                 'Timestamp' => Carbon::now()
             ]
         ]);

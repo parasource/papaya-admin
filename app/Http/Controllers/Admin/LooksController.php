@@ -11,7 +11,9 @@ use App\Services\Adviser;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class LooksController extends Controller
 {
@@ -50,42 +52,37 @@ class LooksController extends Controller
 
     public function store(Request $request)
     {
+        $look = Look::create([
+            'name' => $request['name'],
+            'slug' => Str::slug($request['name']),
+//                'image' => $request['image']->store('looks', 'public'),
+            'desc' => $request['desc']
+        ]);
 
-        DB::transaction(function () use ($request) {
-            $look = Look::create([
-                'name' => $request['name'],
-                'slug' => Str::slug($request['name']),
-                'image' => $request['image']->store('looks', 'public')
-            ]);
+        $image = $request['image'];
+        $file = $image->store('looks', 'public');
+        $filename = md5($image->getClientOriginalName() . time());
 
-            $filename = md5($image->getClientOriginalName() . time());
+        $image = Image::make($image);
 
-            $image = Image::make($image);
+        $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path('storage/looks/' . $filename . '.webp'));
 
-            $watermark = Image::make(public_path('/images/watermark.png'));
-            $image->insert($watermark, 'center');
+        Storage::disk('public')->delete($file);
 
-            $image->encode('webp', 80)->resize(null, 500, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save(public_path('storage/profiles/' . $filename . '.webp'));
+        $look->update([
+            'image' => '/looks/' . $filename . '.webp',
+        ]);
 
-            Storage::disk('public')->delete($file);
+        foreach ($request['categories'] as $id) {
+            $look->categories()->attach($id);
+        }
 
-            $profile->images()->create([
-                'file' => '/storage/profiles/' . $filename . '.webp'
-            ]);
-
-            foreach ($request['categories'] as $id) {
-                $look->categories()->attach($id);
-            }
-
-            $this->adviser->storeItem($look, $request['categories']);
-
-            return redirect()->route('admin.looks.show', $look);
-        });
+        $this->adviser->storeItem($look, $request['categories']);
 
 
-        return redirect()->route('admin.looks.index');
+        return redirect()->route('admin.looks.show', $look);
     }
 
 
@@ -104,31 +101,42 @@ class LooksController extends Controller
 
     public function update(Request $request, Look $look)
     {
-        DB::transaction(function () use ($request, $look) {
+        $look->update([
+            'name' => $request['name'],
+            'slug' => Str::slug($request['name']),
+            'desc' => $request['desc']
+        ]);
+
+        if ($request['image']) {
+            @\Storage::disk('public')->delete($look->image);
+
+            $image = $request['image'];
+            $file = $image->store('looks', 'public');
+
+            $filename = md5($image->getClientOriginalName() . time());
+
+            $image = Image::make($image);
+
+            $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('storage/looks/' . $filename . '.webp'));
+
+            Storage::disk('public')->delete($file);
+
             $look->update([
-                'name' => $request['name'],
-                'slug' => Str::slug($request['name']),
-                'desc' => $request['desc']
+                'image' => '/looks/' . $filename . '.webp',
             ]);
+        }
 
-            if ($request['image']) {
-                \Storage::disk('public')->delete($look->image);
-                $look->update([
-                    'image' => $request['image']->store('looks', 'public')
-                ]);
-            }
+        // detaching previous records
+        foreach ($look->categories as $c) {
+            $look->categories()->detach($c->id);
+        }
+        foreach ($request['categories'] as $id) {
+            $look->categories()->attach($id);
+        }
 
-            // detaching previous records
-            foreach ($look->categories as $c) {
-                $look->categories()->detach($c->id);
-            }
-            foreach ($request['categories'] as $id) {
-                $look->categories()->attach($id);
-            }
-
-            $this->adviser->storeItem($look, $request['categories']);
-
-        });
+        $this->adviser->storeItem($look, $request['categories']);
 
         return redirect()->route('admin.looks.show', $look);
     }

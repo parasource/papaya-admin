@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(Adviser::class, function () {
-            return new Adviser('http://62.113.102.18:8087');
+            return new Adviser('http://gorse-server:8087');
         });
     }
 
