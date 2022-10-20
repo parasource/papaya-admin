@@ -32,7 +32,7 @@
         <tr>
             <th>Картинка</th>
             <td>
-                <img height="450" src="{{ \Storage::disk('public')->url($look->image) }}" alt="">
+                <img height="450" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
             </td>
         </tr>
         <tbody>

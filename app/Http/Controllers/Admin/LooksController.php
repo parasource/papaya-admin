@@ -67,7 +67,7 @@ class LooksController extends Controller
 
         $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
             $constraint->aspectRatio();
-        })->save(public_path('/looks/' . $filename . '.webp'));
+        })->save('/var/www/storage/looks/' . $filename . '.webp');
 
         Storage::disk('public')->delete($file);
 
