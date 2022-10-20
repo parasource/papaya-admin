@@ -112,14 +112,13 @@ class LooksController extends Controller
 
             $image = $request['image'];
             $file = $image->store('looks', 'public');
-
             $filename = md5($image->getClientOriginalName() . time());
 
             $image = Image::make($image);
 
             $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save(public_path('storage/looks/' . $filename . '.webp'));
+            })->save('/var/www/storage/looks/' . $filename . '.webp');
 
             Storage::disk('public')->delete($file);
 

@@ -8,7 +8,9 @@ use App\Models\ItemURL;
 use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class WardrobeController extends Controller
 {
@@ -30,11 +32,30 @@ class WardrobeController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+        ]);
+
         $item = WardrobeItem::create([
             'name' => $request['name'],
-            'image' => $request['image']->store('wardrobe', 'public'),
             'slug' => Str::slug($request['name']),
             'wardrobe_category_id' => $request['category_id']
+        ]);
+
+        $image = $request['image'];
+        $file = $image->store('wardrobe', 'public');
+        $filename = md5($image->getClientOriginalName() . time());
+
+        $image = Image::make($image);
+
+        $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save('/var/www/storage/wardrobe/' . $filename . '.webp');
+
+        Storage::disk('public')->delete($file);
+
+        $item->update([
+            'image' => '/wardrobe/' . $filename . '.webp',
         ]);
 
         return redirect()->route('admin.wardrobe-items.show', $item);
@@ -64,8 +85,21 @@ class WardrobeController extends Controller
 
         if ($request['image']) {
             \Storage::disk('public')->delete($item->image);
+
+            $image = $request['image'];
+            $file = $image->store('wardrobe', 'public');
+            $filename = md5($image->getClientOriginalName() . time());
+
+            $image = Image::make($image);
+
+            $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('/var/www/storage/wardrobe/' . $filename . '.webp');
+
+            Storage::disk('public')->delete($file);
+
             $item->update([
-                'image' => $request['image']->store('wardrobe', 'public'),
+                'image' => '/wardrobe/' . $filename . '.webp',
             ]);
         }
 

@@ -31,7 +31,7 @@
         <tr>
             <th>Картинка</th>
             <td>
-                <img src="{{ \Storage::disk('public')->url($item->image) }}" alt="">
+                <img src="https://static.papaya.parasource.tech{{$item->image}}" alt="">
             </td>
         </tr>
         <tbody>

@@ -28,6 +28,11 @@
         <tr>
             <th>Описание</th><td>{{ $topic->desc }}</td>
         </tr>
+        <tr>
+            <th>Картинка</th><td>
+                <img height="450" src="https://static.papaya.parasource.tech{{$topic->image}}" alt="">
+            </td>
+        </tr>
         <tbody>
         </tbody>
     </table>

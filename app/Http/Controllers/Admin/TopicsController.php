@@ -7,7 +7,9 @@ use App\Models\Look;
 use App\Models\Topic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class TopicsController extends Controller
 {
@@ -31,8 +33,23 @@ class TopicsController extends Controller
         $topic = Topic::create([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']."-".\Date::now()->format("d-m-Y")),
-            'desc' => $request['desc'],
-            'image' => $request['image']->store('topics', 'public')
+            'desc' => $request['desc']
+        ]);
+
+        $image = $request['image'];
+        $file = $image->store('topics', 'public');
+        $filename = md5($image->getClientOriginalName() . time());
+
+        $image = Image::make($image);
+
+        $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save('/var/www/storage/topics/' . $filename . '.webp');
+
+        Storage::disk('public')->delete($file);
+
+        $topic->update([
+            'image' => '/topics/' . $filename . '.webp',
         ]);
 
         return redirect()->route('admin.topics.show', $topic);
@@ -60,8 +77,22 @@ class TopicsController extends Controller
         ]);
 
         if ($request['image']) {
+            @\Storage::disk('public')->delete($topic->image);
+
+            $image = $request['image'];
+            $file = $image->store('topics', 'public');
+            $filename = md5($image->getClientOriginalName() . time());
+
+            $image = Image::make($image);
+
+            $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('/var/www/storage/topics/' . $filename . '.webp');
+
+            Storage::disk('public')->delete($file);
+
             $topic->update([
-                'image' => $request['image']->store('topics', 'public')
+                'image' => '/topics/' . $filename . '.webp',
             ]);
         }
 
