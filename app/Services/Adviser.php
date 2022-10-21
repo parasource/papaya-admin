@@ -24,7 +24,7 @@ class Adviser
             RequestOptions::JSON => [
                 'Categories' => $categories,
                 'IsHidden' => false,
-                'ItemID' => "$look->id",
+                'ItemID' => "$look->slug",
                 'Season' => $look->season,
                 'Timestamp' => Carbon::now(),
                 'Sex' => $look->sex,

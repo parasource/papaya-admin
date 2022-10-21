@@ -81,7 +81,12 @@ class LooksController extends Controller
             $look->categories()->attach($id);
         }
 
-        $this->adviser->storeItem($look, $request['categories']);
+        $categories = [];
+        foreach ($look->categories as $category) {
+            $categories[] = $category->slug;
+        }
+
+        $this->adviser->storeItem($look, $categories);
 
 
         return redirect()->route('admin.looks.show', $look);
@@ -139,7 +144,12 @@ class LooksController extends Controller
             $look->categories()->attach($id);
         }
 
-        $this->adviser->storeItem($look, $request['categories']);
+        $categories = [];
+        foreach ($look->categories as $category) {
+            $categories[] = $category->slug;
+        }
+
+        $this->adviser->storeItem($look, $categories);
 
         return redirect()->route('admin.looks.show', $look);
     }
