@@ -49,7 +49,7 @@
 
                 <div class="form-group my-3">
                     <label for="sex" class="col-form-label">Пол</label>
-                    <select class="form-select" multiple name="sex" id="sex">
+                    <select class="form-select" name="sex" id="sex">
                         @foreach($sex as $key => $value)
                             <option value="{{ $key }}" {{ old('sex') == $key? 'selected' : '' }} >{{ $value }}</option>
                         @endforeach

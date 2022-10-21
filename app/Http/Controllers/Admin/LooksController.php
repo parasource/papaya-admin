@@ -150,6 +150,8 @@ class LooksController extends Controller
             'deleted_at' => Carbon::now()
         ]);
 
+        $this->adviser->deleteItem($look);
+
         return redirect()->route('admin.looks.index');
     }
 

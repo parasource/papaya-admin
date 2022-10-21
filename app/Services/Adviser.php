@@ -26,8 +26,13 @@ class Adviser
                 'IsHidden' => false,
                 'ItemID' => "$look->id",
                 'Season' => $look->season,
-                'Timestamp' => Carbon::now()
+                'Timestamp' => Carbon::now(),
+                'Sex' => $look->sex,
             ]
         ]);
+    }
+
+    public function deleteItem(Look $look) {
+        $res = $this->client->request("DELETE", "/api/item/".$look->id);
     }
 }
