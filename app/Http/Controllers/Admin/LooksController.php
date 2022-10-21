@@ -46,7 +46,8 @@ class LooksController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.looks.create', compact('categories'));
+        $sex = Look::sexList();
+        return view('admin.looks.create', compact('categories', 'sex'));
     }
 
 
@@ -56,7 +57,8 @@ class LooksController extends Controller
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
 //                'image' => $request['image']->store('looks', 'public'),
-            'desc' => $request['desc']
+            'desc' => $request['desc'],
+            'sex' => $request['sex']
         ]);
 
         $image = $request['image'];
@@ -95,7 +97,8 @@ class LooksController extends Controller
     public function edit(Look $look)
     {
         $categories = Category::all();
-        return view('admin.looks.edit', compact('look', 'categories'));
+        $sex = Look::sexList();
+        return view('admin.looks.edit', compact('look', 'categories', 'sex'));
     }
 
 
@@ -104,7 +107,8 @@ class LooksController extends Controller
         $look->update([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
-            'desc' => $request['desc']
+            'desc' => $request['desc'],
+            'sex' => $request['sex']
         ]);
 
         if ($request['image']) {

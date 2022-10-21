@@ -9,13 +9,27 @@ class Look extends Model
 {
     use HasFactory;
 
+    public const SEX_MALE = "male";
+    public const SEX_FEMALE = "female";
+
     protected $table = "looks";
 
     protected $fillable = [
-        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at'
+        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at', 'sex'
     ];
 
     public $timestamps = true;
+
+    public static function sexList() {
+        return [
+            self::SEX_MALE => 'Муж.',
+            self::SEX_FEMALE => 'Жен.'
+        ];
+    }
+
+    public function getSex() {
+        return self::sexList()[$this->sex];
+    }
 
     public function items()
     {
