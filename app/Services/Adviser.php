@@ -24,7 +24,7 @@ class Adviser
             RequestOptions::JSON => [
                 'Categories' => $categories,
                 'IsHidden' => false,
-                'ItemID' => "$look->slug",
+                'ItemID' => $look->slug,
                 'Season' => $look->season,
                 'Timestamp' => Carbon::now(),
                 'Sex' => $look->sex,
@@ -33,6 +33,6 @@ class Adviser
     }
 
     public function deleteItem(Look $look) {
-        $res = $this->client->request("DELETE", "/api/item/".$look->id);
+        $res = $this->client->request("DELETE", "/api/item/".$look->slug);
     }
 }

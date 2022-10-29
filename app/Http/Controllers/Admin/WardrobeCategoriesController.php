@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WardrobeCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,7 @@ class WardrobeCategoriesController extends Controller
 
     public function index()
     {
-        $categories = WardrobeCategory::all();
+        $categories = WardrobeCategory::whereNull('deleted_at')->get();
 
         return view('admin.wardrobe-categories.index', compact('categories'));
     }
@@ -28,7 +29,8 @@ class WardrobeCategoriesController extends Controller
     {
         $wardrobeCategory = WardrobeCategory::create([
            'name' => $request['name'],
-           'slug' => Str::slug($request['name'])
+           'slug' => Str::slug($request['name']),
+            'parent_category' => $request['parent_category']
         ]);
 
         return redirect()->route('admin.wardrobe-categories.show', $wardrobeCategory);
@@ -51,7 +53,8 @@ class WardrobeCategoriesController extends Controller
     {
         $wardrobeCategory->update([
             'name' => $request['name'],
-            'slug' => Str::slug($request['name'])
+            'slug' => Str::slug($request['name']),
+            'parent_category' => $request['parent_category']
         ]);
 
         return redirect()->route('admin.wardrobe-categories.show', $wardrobeCategory);
@@ -65,6 +68,10 @@ class WardrobeCategoriesController extends Controller
      */
     public function destroy(WardrobeCategory $wardrobeCategory)
     {
-        //
+        $wardrobeCategory->update([
+            'deleted_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('admin.wardrobe-categories.index');
     }
 }

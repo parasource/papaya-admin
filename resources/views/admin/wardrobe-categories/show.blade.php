@@ -24,6 +24,9 @@
         <tr>
             <th>Slug</th><td>{{ $wardrobeCategory->slug }}</td>
         </tr>
+        <tr>
+            <th>Родительская категория</th><td>{{ $wardrobeCategory->parent_category }}</td>
+        </tr>
         <tbody>
         </tbody>
     </table>

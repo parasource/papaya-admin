@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\ItemURL;
 use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -109,7 +110,11 @@ class WardrobeController extends Controller
 
     public function destroy(WardrobeItem $item)
     {
-        //
+        $item->update([
+            'deleted_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('admin.wardrobe-items.index');
     }
 
     /////////////

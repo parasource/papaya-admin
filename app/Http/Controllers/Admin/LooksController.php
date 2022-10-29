@@ -81,7 +81,9 @@ class LooksController extends Controller
             $look->categories()->attach($id);
         }
 
-        $categories = [];
+        $categories = [
+            $look->sex
+        ];
         foreach ($look->categories as $category) {
             $categories[] = $category->slug;
         }
@@ -144,7 +146,9 @@ class LooksController extends Controller
             $look->categories()->attach($id);
         }
 
-        $categories = [];
+        $categories = [
+            $look->sex
+        ];
         foreach ($look->categories as $category) {
             $categories[] = $category->slug;
         }

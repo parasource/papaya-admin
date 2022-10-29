@@ -12,7 +12,7 @@ class WardrobeCategory extends Model
     protected $table = 'wardrobe_categories';
 
     protected $fillable = [
-        'name', 'slug'
+        'name', 'slug', 'parent_category'
     ];
 
     public $timestamps = true;
