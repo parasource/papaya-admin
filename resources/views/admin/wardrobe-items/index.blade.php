@@ -15,7 +15,7 @@
             <th>ID</th>
             <th>Название</th>
             <th>Категория</th>
-            <th>Slug</th>
+            <th>Картинка</th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +25,9 @@
                 <td>{{ $item->id }}</td>
                 <td><a href="{{ route('admin.wardrobe-items.show', $item) }}">{{ $item->name }}</a></td>
                 <td><a href="{{ route('admin.wardrobe-categories.show', $item->category) }}">{{ $item->category->name }}</a></td>
-                <td>{{ $item->slug }}</td>
+                <td>
+                    <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+                </td>
             </tr>
         @endforeach
 

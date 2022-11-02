@@ -61,7 +61,7 @@
                         <td>{{ $item->id }}</td>
                         <td><a href="{{ route('admin.looks.show', $item) }}">{{ $item->name }}</a></td>
                         <td>
-                            <img height="150" src="{{ Storage::disk('public')->url($item->image) }}" alt="">
+                            <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
                         </td>
                         <td>
                             <form action="{{ route('admin.looks.items.remove', compact('look', 'item')) }}"

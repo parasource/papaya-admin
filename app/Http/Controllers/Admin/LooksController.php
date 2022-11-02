@@ -9,7 +9,7 @@ use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use App\Services\Adviser;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -79,9 +79,7 @@ class LooksController extends Controller
 
         $image = Image::make($image);
 
-        $image->encode('webp')->resize(null, 1000, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save('/var/www/storage/looks/' . $filename . '.webp');
+        $image->encode('webp')->save('/var/www/storage/looks/' . $filename . '.webp');
 
         Storage::disk('public')->delete($file);
 
@@ -128,9 +126,7 @@ class LooksController extends Controller
 
             $image = Image::make($image);
 
-            $image->encode('webp')->resize(null, 1000, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('/var/www/storage/looks/' . $filename . '.webp');
+            $image->encode('webp')->save('/var/www/storage/looks/' . $filename . '.webp');
 
             Storage::disk('public')->delete($file);
 

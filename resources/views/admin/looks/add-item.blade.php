@@ -59,7 +59,7 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td><a href="{{ route('admin.wardrobe-items.show', $item) }}">{{ $item->name }}</a></td>
-                <td><img height="150" src="{{ Storage::disk('public')->url($item->image) }}" alt=""></td>
+                <td><img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt=""></td>
                 <td>
                     <form action="{{ route('admin.looks.items.add', compact('look', 'item')) }}" method="post">
                         @csrf
