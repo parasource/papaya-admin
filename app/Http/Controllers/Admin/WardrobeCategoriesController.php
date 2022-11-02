@@ -13,7 +13,7 @@ class WardrobeCategoriesController extends Controller
 
     public function index()
     {
-        $categories = WardrobeCategory::whereNull('deleted_at')->get();
+        $categories = WardrobeCategory::whereNull('deleted_at')->paginate(20);
 
         return view('admin.wardrobe-categories.index', compact('categories'));
     }

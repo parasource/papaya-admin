@@ -70,4 +70,6 @@
         </tbody>
     </table>
 
+    {{ $looks->links() }}
+
 @endsection
