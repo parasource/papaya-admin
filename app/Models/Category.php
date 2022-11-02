@@ -9,7 +9,7 @@ class Category extends Model
     public $timestamps = true;
     protected $table = 'categories';
     protected $fillable = [
-        'name'
+        'name', 'slug'
     ];
 
     public function looks()

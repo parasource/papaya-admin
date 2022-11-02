@@ -18,7 +18,7 @@ class WardrobeController extends Controller
 
     public function index()
     {
-        $items = WardrobeItem::whereNull('deleted_at')->with('category')->paginate(20);
+        $items = WardrobeItem::with('category')->paginate(20);
 
         return view('admin.wardrobe-items.index', compact('items'));
     }

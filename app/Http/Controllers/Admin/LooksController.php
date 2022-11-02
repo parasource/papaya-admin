@@ -53,28 +53,13 @@ class LooksController extends Controller
 
     public function store(Request $request)
     {
+        $rand = rand(1000, 9999);
         $look = Look::create([
             'name' => $request['name'],
-            'slug' => Str::slug($request['name']),
+            'slug' => Str::slug($request['name']) . "-$rand",
 //                'image' => $request['image']->store('looks', 'public'),
             'desc' => $request['desc'],
             'sex' => $request['sex']
-        ]);
-
-        $image = $request['image'];
-        $file = $image->store('looks', 'public');
-        $filename = md5($image->getClientOriginalName() . time());
-
-        $image = Image::make($image);
-
-        $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save('/var/www/storage/looks/' . $filename . '.webp');
-
-        Storage::disk('public')->delete($file);
-
-        $look->update([
-            'image' => '/looks/' . $filename . '.webp',
         ]);
 
         foreach ($request['categories'] as $id) {
@@ -87,6 +72,22 @@ class LooksController extends Controller
         foreach ($look->categories as $category) {
             $categories[] = $category->slug;
         }
+
+        $image = $request['image'];
+        $file = $image->store('looks', 'public');
+        $filename = md5($image->getClientOriginalName() . time());
+
+        $image = Image::make($image);
+
+        $image->encode('webp')->resize(null, 1000, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save('/var/www/storage/looks/' . $filename . '.webp');
+
+        Storage::disk('public')->delete($file);
+
+        $look->update([
+            'image' => '/looks/' . $filename . '.webp',
+        ]);
 
         $this->adviser->storeItem($look, $categories);
 
@@ -119,7 +120,7 @@ class LooksController extends Controller
         ]);
 
         if ($request['image']) {
-            @\Storage::disk('public')->delete($look->image);
+            @\Storage::disk('public')->delete('/var/www/storage'.$look->image);
 
             $image = $request['image'];
             $file = $image->store('looks', 'public');
@@ -127,7 +128,7 @@ class LooksController extends Controller
 
             $image = Image::make($image);
 
-            $image->encode('webp', 100)->resize(null, 700, function ($constraint) {
+            $image->encode('webp')->resize(null, 1000, function ($constraint) {
                 $constraint->aspectRatio();
             })->save('/var/www/storage/looks/' . $filename . '.webp');
 

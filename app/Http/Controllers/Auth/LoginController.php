@@ -35,7 +35,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = route('profile.index');
+        $this->redirectTo = route('admin.index');
         $this->middleware('guest')->except('logout');
     }
 }
