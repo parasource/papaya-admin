@@ -25,7 +25,7 @@
                 <td><a href="{{ route('admin.brands.show', $brand) }}">{{ $brand->name }}</a></td>
                 <td>{{ $brand->slug }}</td>
                 <td>
-                    <img height="100" src="{{ Storage::disk('public')->url($brand->image) }}" alt="">
+                    <img height="100" src="https://static.papaya.parasource.tech{{ $brand->image }}" alt="">
                 </td>
                 <td>{{ $brand->created_at->format('d-m-Y') }}</td>
             </tr>

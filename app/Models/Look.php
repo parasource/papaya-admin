@@ -12,10 +12,14 @@ class Look extends Model
     public const SEX_MALE = "male";
     public const SEX_FEMALE = "female";
 
+    public const SEASON_SPRING_FALL = "spring-fall";
+    public const SEASON_SUMMER = "summer";
+    public const SEASON_WINTER = "winter";
+
     protected $table = "looks";
 
     protected $fillable = [
-        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at', 'sex'
+        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at', 'sex', 'season'
     ];
 
     public $timestamps = true;
@@ -30,6 +34,19 @@ class Look extends Model
     public function getSex() {
         return self::sexList()[$this->sex];
     }
+
+    public static function seasonsList() {
+        return [
+            self::SEASON_SPRING_FALL => "Весна-Осень",
+            self::SEASON_SUMMER => "Лето",
+            self::SEASON_WINTER => "Зима",
+        ];
+    }
+
+    public function getSeason() {
+        return self::seasonsList()[$this->season];
+    }
+
 
     public function items()
     {

@@ -47,7 +47,8 @@ class LooksController extends Controller
     {
         $categories = Category::all();
         $sex = Look::sexList();
-        return view('admin.looks.create', compact('categories', 'sex'));
+        $seasons = Look::seasonsList();
+        return view('admin.looks.create', compact('categories', 'sex', 'seasons'));
     }
 
 
@@ -57,9 +58,9 @@ class LooksController extends Controller
         $look = Look::create([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']) . "-$rand",
-//                'image' => $request['image']->store('looks', 'public'),
             'desc' => $request['desc'],
-            'sex' => $request['sex']
+            'sex' => $request['sex'],
+            'season' => $request['season']
         ]);
 
         foreach ($request['categories'] as $id) {
@@ -67,7 +68,8 @@ class LooksController extends Controller
         }
 
         $categories = [
-            $look->sex
+            $look->sex,
+            $look->season,
         ];
         foreach ($look->categories as $category) {
             $categories[] = $category->slug;
@@ -104,7 +106,8 @@ class LooksController extends Controller
     {
         $categories = Category::all();
         $sex = Look::sexList();
-        return view('admin.looks.edit', compact('look', 'categories', 'sex'));
+        $seasons = Look::seasonsList();
+        return view('admin.looks.edit', compact('look', 'categories', 'sex', 'seasons'));
     }
 
 
@@ -112,9 +115,9 @@ class LooksController extends Controller
     {
         $look->update([
             'name' => $request['name'],
-            'slug' => Str::slug($request['name']),
             'desc' => $request['desc'],
-            'sex' => $request['sex']
+            'sex' => $request['sex'],
+            'season' => $request['season'],
         ]);
 
         if ($request['image']) {
@@ -144,7 +147,8 @@ class LooksController extends Controller
         }
 
         $categories = [
-            $look->sex
+            $look->sex,
+            $look->season,
         ];
         foreach ($look->categories as $category) {
             $categories[] = $category->slug;

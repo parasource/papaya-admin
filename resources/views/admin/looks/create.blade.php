@@ -55,6 +55,15 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group my-3">
+                    <label for="season" class="col-form-label">Сезон</label>
+                    <select class="form-select" name="season" id="season">
+                        @foreach($seasons as $key => $value)
+                            <option value="{{ $key }}" {{ old('season') == $key? 'selected' : '' }} >{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="card-footer">

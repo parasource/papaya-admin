@@ -4,7 +4,9 @@
 
     @include('admin._nav', ['route' => 'looks'])
 
-    <h3>{{ $look->name }}</h3>
+    <a href="{{ route('admin.looks.show', $look) }}"><h3>{{ $look->name }}</h3></a>
+
+    <img height="250" src="https://static.papaya.parasource.tech{{$look->name}}" alt="">
 
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>
@@ -27,6 +29,7 @@
                         <div class="form-group">
                             <label for="category_id" class="col-form-label">Категории</label>
                             <select class="form-select" name="category_id" id="category_id">
+                                <option value=""></option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
