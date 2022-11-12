@@ -37,6 +37,15 @@
                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
+
+                <div class="form-group my-3">
+                    <label for="sex" class="col-form-label">Пол</label>
+                    <select class="form-select" name="sex" id="sex">
+                        @foreach($sex as $key => $value)
+                            <option value="{{ $key }}" {{ old('sex') == $key? 'selected' : '' }} >{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-success">Сохранить</button>

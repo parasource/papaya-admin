@@ -27,7 +27,8 @@ class WardrobeController extends Controller
     public function create()
     {
         $categories = WardrobeCategory::all();
-        return view('admin.wardrobe-items.create', compact('categories'));
+        $sex = WardrobeItem::sexList();
+        return view('admin.wardrobe-items.create', compact('categories', 'sex'));
     }
 
 
@@ -72,7 +73,8 @@ class WardrobeController extends Controller
     public function edit(WardrobeItem $item)
     {
         $categories = WardrobeCategory::all();
-        return view('admin.wardrobe-items.edit', compact('item', 'categories'));
+        $sex = WardrobeItem::sexList();
+        return view('admin.wardrobe-items.edit', compact('item', 'categories', 'sex'));
     }
 
 

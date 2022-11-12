@@ -9,6 +9,10 @@ class WardrobeItem extends Model
 {
     use HasFactory;
 
+    public const SEX_MALE = "male";
+    public const SEX_FEMALE = "female";
+    public const SEX_UNISEX = "unisex";
+
     protected $table = 'wardrobe_items';
 
     protected $fillable = [
@@ -16,6 +20,18 @@ class WardrobeItem extends Model
     ];
 
     public $timestamps = false;
+
+    public static function sexList() {
+        return [
+            self::SEX_MALE => 'Муж.',
+            self::SEX_FEMALE => 'Жен.',
+            self::SEX_UNISEX => 'Унисекс'
+        ];
+    }
+
+    public function getSex() {
+        return self::sexList()[$this->sex];
+    }
 
     public function category()
     {
