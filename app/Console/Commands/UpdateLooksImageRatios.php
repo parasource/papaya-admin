@@ -34,7 +34,7 @@ class UpdateLooksImageRatios extends Command
             $ratio = $this->decToFraction($image->getWidth() / $image->getHeight());
             $this->info("- ratio is ".$ratio);
             $look->update([
-                'look_ratio' => $ratio
+                'image_ratio' => $ratio
             ]);
         }
 
