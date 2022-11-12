@@ -25,13 +25,20 @@ class UpdateLooksImageRatios extends Command
      */
     public function handle()
     {
-        foreach (Look::whereNull('deleted_at')->cursor() as $look) {
-            $image = Image::make("/var/www/storage".$look->image);
+        $looks = Look::whereNull('deleted_at')->get();
+        foreach ($looks as $look) {
+            $path = "/var/www/storage".$look->image;
+            $image = Image::make($path);
+            $this->info("updating ratio for image ".$path);
 
+            $ratio = $this->decToFraction($image->getWidth() / $image->getHeight());
+            $this->info("- ratio is ".$ratio);
             $look->update([
-                'look_ratio' => $this->decToFraction($image->getWidth() / $image->getHeight())
+                'look_ratio' => $ratio
             ]);
         }
+
+        $this->info("successfully updated ratios");
 
         return 0;
     }
