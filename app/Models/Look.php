@@ -19,7 +19,7 @@ class Look extends Model
     protected $table = "looks";
 
     protected $fillable = [
-        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at', 'sex', 'season'
+        'name', 'slug', 'image', 'desc', 'created_at', 'updated_at', 'deleted_at', 'sex', 'season', 'image_ratio'
     ];
 
     public $timestamps = true;
