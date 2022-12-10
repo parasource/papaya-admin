@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.looks.categories.edit', $category) }}
+
     @include('admin._nav', ['route' => 'looks'])
 
     <form action="{{ route('admin.looks.categories.update', $category) }}" enctype="multipart/form-data" method="POST">

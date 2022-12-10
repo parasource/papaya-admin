@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.topics.edit', $topic) }}
+
     @include('admin._nav', ['route' => 'topics'])
 
     <form action="{{ route('admin.topics.update', $topic) }}" enctype="multipart/form-data" method="POST">

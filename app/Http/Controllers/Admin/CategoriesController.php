@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Look;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -37,7 +38,8 @@ class CategoriesController extends Controller
 
     public function show(Category $category)
     {
-        return view('admin.looks.categories.show', compact('category'));
+        $looks = $category->looks()->paginate(20);
+        return view('admin.looks.categories.show', compact('category', 'looks'));
     }
 
 

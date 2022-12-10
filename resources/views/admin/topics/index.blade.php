@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.topics.index') }}
+
     @include('admin._nav', ['route' => 'topics'])
 
     <div class="my-3">

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.looks.categories.index') }}
+
     @include('admin._nav', ['route' => 'looks'])
 
     <h3>Категории луков</h3>

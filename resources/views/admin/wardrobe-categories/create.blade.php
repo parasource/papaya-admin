@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.wardrobe-categories.create') }}
+
     @include('admin._nav', ['route' => 'wardrobe'])
 
     <form action="{{ route('admin.wardrobe-categories.store') }}" enctype="multipart/form-data" method="POST">

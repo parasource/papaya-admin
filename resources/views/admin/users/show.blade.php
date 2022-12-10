@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.users.show', $user) }}
+
     @include('admin._nav', ['route' => 'users'])
 
     <div class="d-flex flex-row mb-3">

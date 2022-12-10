@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.topics.create') }}
+
     @include('admin._nav', ['route' => 'topics'])
 
     <form action="{{ route('admin.topics.store') }}" enctype="multipart/form-data" method="POST">

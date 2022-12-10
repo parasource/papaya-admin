@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.looks.items-add', $look) }}
+
     @include('admin._nav', ['route' => 'looks'])
 
     <a href="{{ route('admin.looks.show', $look) }}"><h3>{{ $look->name }}</h3></a>

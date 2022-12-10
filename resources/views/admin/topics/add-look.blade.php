@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.topics.add-look', $topic) }}
+
     @include('admin._nav', ['route' => 'topics'])
 
     <h3>{{ $topic->name }}</h3>

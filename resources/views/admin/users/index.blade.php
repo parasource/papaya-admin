@@ -2,11 +2,13 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.users.index') }}
+
     @include('admin._nav', ['route' => 'users'])
 
-    <div class="my-3">
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">Создать пользователя</a>
-    </div>
+{{--    <div class="my-3">--}}
+{{--        <a href="{{ route('admin.users.create') }}" class="btn btn-success">Создать пользователя</a>--}}
+{{--    </div>--}}
 
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>

@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.wardrobe-categories.edit', $wardrobeCategory) }}
+
     @include('admin._nav', ['route' => 'wardrobe'])
 
     <form action="{{ route('admin.wardrobe-categories.update', $wardrobeCategory) }}" enctype="multipart/form-data" method="POST">

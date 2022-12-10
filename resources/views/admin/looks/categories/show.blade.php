@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.looks.categories.show', $category) }}
+
     @include('admin._nav', ['route' => 'looks'])
 
     <div class="d-flex flex-row mb-3">
@@ -46,7 +48,7 @@
                 </thead>
                 <tbody>
 
-                @foreach ($category->looks as $look)
+                @foreach ($looks as $look)
                     <tr>
                         <td>{{ $look->id }}</td>
                         <td><a href="{{ route('admin.looks.show', $look) }}">{{ $look->name }}</a></td>
@@ -55,6 +57,8 @@
                         <td>{{ $look->created_at->format('d-m-Y') }}</td>
                     </tr>
                 @endforeach
+
+                {{ $looks->links() }}
 
                 </tbody>
             </table>

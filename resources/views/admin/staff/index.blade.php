@@ -2,13 +2,12 @@
 
 @section('content')
 
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.looks.index') }}
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.staff.index') }}
 
-    @include('admin._nav', ['route' => 'looks'])
+    @include('admin._nav', ['route' => 'staff'])
 
     <div class="my-3">
-        <a href="{{ route('admin.looks.categories.index') }}" class="btn btn-primary">Категории</a>
-        <a href="{{ route('admin.looks.create') }}" class="btn btn-success">Добавить лук</a>
+        <a href="{{ route('admin.staff.create') }}" class="btn btn-success">Создать</a>
     </div>
 
     <div class="card mb-3">
@@ -24,19 +23,19 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Название</label>
+                            <label for="name" class="col-form-label">Имя</label>
                             <input id="name" class="form-control" name="name" value="{{ request('name') }}">
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="last_name" class="col-form-label">Описание</label>
-                            <input id="last_name" class="form-control" name="desc" value="{{ request('desc') }}">
+                            <label for="email" class="col-form-label">Эл.почта</label>
+                            <input id="email" class="form-control" name="email" value="{{ request('email') }}">
                         </div>
                     </div>
                     <div class="col-sm-1">
                         <div class="form-group">
-                            <label class="col-form-label">&nbsp;</label><br />
+                            <label class="col-form-label">&nbsp;</label><br/>
                             <button type="submit" class="btn btn-primary">Найти</button>
                         </div>
                     </div>
@@ -49,29 +48,24 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Название</th>
-            <th>Slug</th>
-            <th>Описание</th>
-            <th>Картинка</th>
-            <th>Создан</th>
+            <th>Имя</th>
+            <th>Эл.почта</th>
+            <th>Роль</th>
         </tr>
         </thead>
         <tbody>
 
-        @foreach ($looks as $look)
+        @foreach ($users as $user)
             <tr>
-                <td>{{ $look->id }}</td>
-                <td><a href="{{ route('admin.looks.show', $look) }}">{{ $look->name }}</a></td>
-                <td>{{ $look->slug }}</td>
-                <td>{{ $look->desc }}</td>
-                <td>{{ $look->image }}</td>
-                <td>{{ $look->created_at->format('d-m-Y') }}</td>
+                <td>{{ $user->id }}</td>
+                <td><a href="{{ route('admin.staff.show', $user) }}">{{ $user->name }}</a></td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->getRole() }}</td>
             </tr>
         @endforeach
 
         </tbody>
     </table>
 
-    {{ $looks->links() }}
-
+    {{ $users->links() }}
 @endsection

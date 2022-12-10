@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ItemURLsController;
 use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\TopicsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -33,7 +34,7 @@ Auth::routes();
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
-    'middleware' => ['auth']
+    'middleware' => ['auth'],
 ], function() {
 
     Route::get("/", [HomeController::class, 'index'])->name('index');
@@ -45,12 +46,13 @@ Route::group([
 
         Route::group([
             'prefix' => 'categories',
-            'as' => 'categories.'
+            'as' => 'categories.',
+            'middleware' => ['can:admin']
         ], function () {
 
 //            Route::get("/", [CategoriesController::class, 'index'])->name('index');
         });
-        Route::resource('categories', CategoriesController::class);
+        Route::resource('categories', CategoriesController::class)->middleware(['can:admin']);
 
         Route::get('/{look}/items-add', [LooksController::class, 'addItems'])->name('items-add');
         Route::post('/{look}/items-add/{item}', [LooksController::class, 'addItem'])->name('items.add');
@@ -62,11 +64,12 @@ Route::group([
 
     Route::group([
         'prefix' => 'brands',
-        'as' => 'brands.'
+        'as' => 'brands.',
+        'middleware' => ['can:admin']
     ], function () {
 
     });
-    Route::resource("brands", BrandsController::class);
+    Route::resource("brands", BrandsController::class)->middleware('can:admin');
 
     Route::group([
         'prefix' => 'topics',
@@ -94,9 +97,10 @@ Route::group([
 
     });
     Route::resource("/wardrobe-items", WardrobeController::class)->parameters(['wardrobe-items' => 'item']);
-    Route::resource('/wardrobe-categories', WardrobeCategoriesController::class);
+    Route::resource('/wardrobe-categories', WardrobeCategoriesController::class)->middleware('can:admin');
 
 
-    Route::resource("users", UsersController::class);
+    Route::resource("users", UsersController::class)->middleware('can:admin')->except(['create', 'store']);
+    Route::resource("staff", StaffController::class)->middleware('can:admin')->parameters(['staff' => 'user']);
 
 });
