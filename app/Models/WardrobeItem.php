@@ -33,6 +33,11 @@ class WardrobeItem extends Model
         return self::sexList()[$this->sex];
     }
 
+    public function looks()
+    {
+        return $this->belongsToMany(Look::class, 'look_items', 'wardrobe_item_id', 'look_id');
+    }
+
     public function category()
     {
         return $this->belongsTo(WardrobeCategory::class, 'wardrobe_category_id', 'id');

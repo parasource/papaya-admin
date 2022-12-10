@@ -9,6 +9,8 @@ use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -16,11 +18,25 @@ use Intervention\Image\Facades\Image;
 class WardrobeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $items = WardrobeItem::with('category')->paginate(20);
+        $categories = WardrobeCategory::all();
 
-        return view('admin.wardrobe-items.index', compact('items'));
+        $query = WardrobeItem::orderByDesc('id');
+
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', 'like', '%' . $value . '%');
+        }
+        if (!empty($value = $request->get('category_id'))) {
+            $query->where('wardrobe_category_id', $value);
+        }
+
+        $items = $query->paginate(20);
+
+        return view('admin.wardrobe-items.index', compact('items', 'categories'));
     }
 
 
@@ -112,9 +128,16 @@ class WardrobeController extends Controller
 
     public function destroy(WardrobeItem $item)
     {
-        $item->update([
-            'deleted_at' => Carbon::now()
-        ]);
+        if (!Gate::check('admin', Auth::user())) {
+            abort(403);
+        }
+
+        $item->looks()->detach();
+        foreach ($item->urls as $url) {
+            $url->delete();
+        }
+
+        $item->delete();
 
         return redirect()->route('admin.wardrobe-items.index');
     }

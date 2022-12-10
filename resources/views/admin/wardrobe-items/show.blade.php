@@ -41,7 +41,7 @@
     </table>
 
     <div class="card">
-        <div class="card-header">Луки</div>
+        <div class="card-header">Ссылки</div>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>

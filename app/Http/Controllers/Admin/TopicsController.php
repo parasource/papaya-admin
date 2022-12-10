@@ -7,6 +7,8 @@ use App\Models\Look;
 use App\Models\Topic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -102,6 +104,10 @@ class TopicsController extends Controller
 
     public function destroy(Topic $topic)
     {
+        if (!Gate::check('admin', Auth::user())) {
+            abort(403);
+        }
+
         $topic->update([
             'deleted_at' => Carbon::now()
         ]);

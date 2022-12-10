@@ -9,8 +9,10 @@ use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use App\Services\Adviser;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -190,6 +192,10 @@ class LooksController extends Controller
 
     public function destroy(Look $look)
     {
+        if (!Gate::check('admin', Auth::user())) {
+            abort(403);
+        }
+
         $look->update([
             'deleted_at' => Carbon::now()
         ]);

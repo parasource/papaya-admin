@@ -11,6 +11,45 @@
         <a href="{{ route('admin.wardrobe-items.create') }}" class="btn btn-success">Добавить</a>
     </div>
 
+    <div class="card mb-3">
+        <div class="card-header">Фильтр</div>
+        <div class="card-body">
+            <form action="?" method="GET">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">ID</label>
+                            <input id="id" class="form-control" name="id" value="{{ request('id') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="name" class="col-form-label">Название</label>
+                            <input id="name" class="form-control" name="name" value="{{ request('name') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="category_id" class="col-form-label">Категории</label>
+                            <select class="form-select" name="category_id" id="category_id">
+                                <option value=""></option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label class="col-form-label">&nbsp;</label><br/>
+                            <button type="submit" class="btn btn-primary">Найти</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <table class="table table-striped">
         <thead>
         <tr>
