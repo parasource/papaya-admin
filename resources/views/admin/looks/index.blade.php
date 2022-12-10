@@ -64,7 +64,9 @@
                 <td><a href="{{ route('admin.looks.show', $look) }}">{{ $look->name }}</a></td>
                 <td>{{ $look->slug }}</td>
                 <td>{{ $look->desc }}</td>
-                <td>{{ $look->image }}</td>
+                <td>
+                    <img height="200" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
+                </td>
                 <td>{{ $look->created_at->format('d-m-Y') }}</td>
             </tr>
         @endforeach

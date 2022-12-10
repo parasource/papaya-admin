@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 
 class LooksController extends Controller
@@ -56,6 +58,19 @@ class LooksController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'desc' => ['required', 'string', 'max:1000'],
+            'sex' => ['required', 'string', Rule::in(array_keys(Look::sexList()))],
+            'season' => ['required', 'string', Rule::in(array_keys(Look::seasonsList()))],
+            'image' => ['required', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
+        ]);
+        if (count($request['categories']) == 0) {
+            throw ValidationException::withMessages([
+                'categories' => 'At least one category is required'
+            ]);
+        }
+
         $rand = rand(1000, 9999);
         $look = Look::create([
             'name' => $request['name'],
@@ -140,6 +155,19 @@ class LooksController extends Controller
 
     public function update(Request $request, Look $look)
     {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'desc' => ['required', 'string', 'max:1000'],
+            'sex' => ['required', 'string', Rule::in(array_keys(Look::sexList()))],
+            'season' => ['required', 'string', Rule::in(array_keys(Look::seasonsList()))],
+            'image' => ['nullable', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
+        ]);
+        if (count($request['categories']) == 0) {
+            throw ValidationException::withMessages([
+                'categories' => 'At least one category is required'
+            ]);
+        }
+
         $look->update([
             'name' => $request['name'],
             'desc' => $request['desc'],

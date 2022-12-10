@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\ItemURL;
+use App\Models\Look;
 use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use Carbon\Carbon;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
 class WardrobeController extends Controller
@@ -51,12 +53,16 @@ class WardrobeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-
+            'name' => ['required', 'string', 'max:255'],
+            'sex' => ['required', 'string', Rule::in(array_keys(WardrobeItem::sexList()))],
+            'wardrobe_category_id' => ['required', 'numeric'],
+            'image' => ['required', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
         ]);
 
         $item = WardrobeItem::create([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
+            'sex' => $request['sex'],
             'wardrobe_category_id' => $request['category_id']
         ]);
 
@@ -96,9 +102,17 @@ class WardrobeController extends Controller
 
     public function update(Request $request, WardrobeItem $item)
     {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'sex' => ['required', 'string', Rule::in(array_keys(WardrobeItem::sexList()))],
+            'wardrobe_category_id' => ['required', 'numeric'],
+            'image' => ['nullable', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
+        ]);
+
         $item->update([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
+            'sex' => $request['sex'],
             'wardrobe_category_id' => $request['category_id']
         ]);
 
