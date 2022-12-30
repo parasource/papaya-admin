@@ -6,9 +6,7 @@
 
     @include('admin._nav', ['route' => 'looks'])
 
-    <a href="{{ route('admin.looks.show', $look) }}"><h3>{{ $look->name }}</h3></a>
-
-    <img height="250" src="https://static.papaya.parasource.tech{{$look->name}}" alt="">
+    <img height="250" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
 
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>

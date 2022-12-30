@@ -53,7 +53,7 @@
             <th>Slug</th>
             <th>Описание</th>
             <th>Картинка</th>
-            <th>Создан</th>
+            <th>Кол-во айтемов</th>
         </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@
                 <td>
                     <img height="200" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
                 </td>
-                <td>{{ $look->created_at->format('d-m-Y') }}</td>
+                <td>{{ $look->items()->count() }}</td>
             </tr>
         @endforeach
 

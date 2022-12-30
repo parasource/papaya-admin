@@ -52,10 +52,12 @@ class WardrobeController extends Controller
 
     public function store(Request $request)
     {
+        $categories = WardrobeCategory::pluck('id')->toArray();
+
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'string', Rule::in(array_keys(WardrobeItem::sexList()))],
-            'wardrobe_category_id' => ['required', 'numeric'],
+            'category_id' => ['required', 'numeric', Rule::in($categories)],
             'image' => ['required', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
         ]);
 
@@ -63,7 +65,7 @@ class WardrobeController extends Controller
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
             'sex' => $request['sex'],
-            'wardrobe_category_id' => $request['category_id']
+            'category_id' => $request['category_id']
         ]);
 
         $image = $request['image'];

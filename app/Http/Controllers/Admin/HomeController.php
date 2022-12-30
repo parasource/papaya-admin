@@ -9,11 +9,17 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index() {
-        $looks = Look::withCount('items')->get();
-        $looksWithoutItems = $looks->where('items_count', 0)->count();
-        $looksWithNotEnoughItems = $looks->where('items_count', '>', 0)->where('items_count', '<', 4)->count();
-        $looksWithItems = $looks->where('items_count', '>=', 4)->count();
+        $maleLooks = Look::where('sex', Look::SEX_MALE)->withCount('items')->get();
+        $maleLooksWithoutItems = $maleLooks->where('items_count', 0)->count();
+        $maleLooksWithNotEnoughItems = $maleLooks->where('items_count', '>', 0)->where('items_count', '<', 4)->count();
+        $maleLooksWithItems = $maleLooks->where('items_count', '>=', 4)->count();
 
-        return view('admin.index', compact('looksWithoutItems', 'looksWithNotEnoughItems', 'looksWithItems'));
+        $femaleLooks = Look::where('sex', Look::SEX_FEMALE)->withCount('items')->get();
+        $femaleLooksWithoutItems = $femaleLooks->where('items_count', 0)->count();
+        $femaleLooksWithNotEnoughItems = $femaleLooks->where('items_count', '>', 0)->where('items_count', '<', 4)->count();
+        $femaleLooksWithItems = $femaleLooks->where('items_count', '>=', 4)->count();
+
+        return view('admin.index', compact('maleLooksWithoutItems', 'maleLooksWithNotEnoughItems', 'maleLooksWithItems',
+                                                        'femaleLooksWithoutItems', 'femaleLooksWithNotEnoughItems', 'femaleLooksWithItems'));
     }
 }

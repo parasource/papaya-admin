@@ -19,9 +19,12 @@
                     <label for="category_id">Категория</label>
                     <select class="form-control" name="category_id" id="category_id">
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category') == $category->id? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
+                    @error('category_id')
+                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -47,6 +50,9 @@
                             <option value="{{ $key }}" {{ old('sex') == $key? 'selected' : '' }} >{{ $value }}</option>
                         @endforeach
                     </select>
+                    @error('sex')
+                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">

@@ -10,9 +10,9 @@
         <div class="col">
             <div class="card mx-2 my-2">
                 <div class="card-body">
-                    <div class="card-title">Сводка по образам</div>
+                    <div class="card-title">Образы мужские</div>
                     <div>
-                        <canvas id="looks-overview-chart"></canvas>
+                        <canvas id="male-looks-overview-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,10 @@
         <div class="col">
             <div class="card mx-2 my-2">
                 <div class="card-body">
-                    <div class="card-title">Сводка по гардеробу</div>
+                    <div class="card-title">Образы женские</div>
+                    <div>
+                        <canvas id="female-looks-overview-chart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,8 +49,8 @@
                 'Образы с > 4 айтемами',
             ],
             datasets: [{
-                label: 'My First Dataset',
-                data: [{{ $looksWithoutItems }}, {{ $looksWithNotEnoughItems }}, {{ $looksWithItems }}],
+                label: 'Male',
+                data: [{{ $maleLooksWithoutItems }}, {{ $maleLooksWithNotEnoughItems }}, {{ $maleLooksWithItems }}],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
@@ -57,15 +60,40 @@
             }]
         };
 
-        const config = {
-            type: 'doughnut',
-            data: data,
-            options: {}
+        const maleLooksChart = new Chart(
+            document.getElementById('male-looks-overview-chart'),
+            {
+                type: 'doughnut',
+                data: data,
+                options: {}
+            }
+        );
+
+        const femaleData = {
+            labels: [
+                'Образы без айтемов',
+                'Образы с < 4 айтемами',
+                'Образы с > 4 айтемами',
+            ],
+            datasets: [{
+                label: 'Female',
+                data: [{{ $femaleLooksWithoutItems }}, {{ $femaleLooksWithNotEnoughItems }}, {{ $femaleLooksWithItems }}],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 6
+            }]
         };
 
-        const myChart = new Chart(
-            document.getElementById('looks-overview-chart'),
-            config
+        const femaleLooksChart = new Chart(
+            document.getElementById('female-looks-overview-chart'),
+            config = {
+                type: 'doughnut',
+                data: femaleData,
+                options: {}
+            }
         );
 
     </script>
