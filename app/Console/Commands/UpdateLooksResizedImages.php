@@ -13,9 +13,7 @@ class UpdateLooksResizedImages extends Command
 
     public function handle()
     {
-        $looks = Look::whereNotNull('deleted_at')->cursor();
-
-        foreach ($looks as $look) {
+        foreach (Look::whereNull('deleted_at')->whereNotNull('image')->cursor() as $look) {
             $this->info("reading image from path: " . '/var/www/storage' . $look->image);
             $image = Image::make('/var/www/storage' . $look->image);
             $image->resize(null, 750, function($constraint) {
