@@ -99,15 +99,16 @@ class LooksController extends Controller
         $image = Image::make($image);
 
         $image->encode('webp')->save('/var/www/storage/looks/' . $filename . '.webp');
-
-        $look->update([
-            'image_ratio' => $this->decToFraction($image->getWidth() / $image->getHeight())
-        ]);
+        $image->resize(null, 750, function($constraint) {
+            $constraint->aspectRatio();
+        })->encode('webp')->save('/var/www/storage/looks/resized/' . $filename . '.webp');
 
         Storage::disk('public')->delete($file);
 
         $look->update([
+            'image_ratio' => $this->decToFraction($image->getWidth() / $image->getHeight()),
             'image' => '/looks/' . $filename . '.webp',
+            'image_resized' => '/looks/resized/' . $filename . '.webp'
         ]);
 
         $this->adviser->storeItem($look, $categories);

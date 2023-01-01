@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class WardrobeItem extends Model
 {
-    use HasFactory;
-
     public const SEX_MALE = "male";
     public const SEX_FEMALE = "female";
     public const SEX_UNISEX = "unisex";
