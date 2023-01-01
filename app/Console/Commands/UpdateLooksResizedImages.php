@@ -23,7 +23,7 @@ class UpdateLooksResizedImages extends Command
             $image->save('/var/www/storage/looks/resized/' . $image->filename . '.' . $image->extension);
 
             $look->update([
-                'image_resized' => '/looks/resized' . $image->filename . '.' . $image->extension
+                'image_resized' => '/looks/resized/' . $image->filename . '.' . $image->extension
             ]);
         }
 

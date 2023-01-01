@@ -65,7 +65,7 @@ class WardrobeController extends Controller
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
             'sex' => $request['sex'],
-            'category_id' => $request['category_id']
+            'wardrobe_category_id' => $request['category_id']
         ]);
 
         $image = $request['image'];
@@ -107,7 +107,7 @@ class WardrobeController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'string', Rule::in(array_keys(WardrobeItem::sexList()))],
-            'wardrobe_category_id' => ['required', 'numeric'],
+            'category_id' => ['required', 'numeric'],
             'image' => ['nullable', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
         ]);
 
@@ -119,7 +119,7 @@ class WardrobeController extends Controller
         ]);
 
         if ($request['image']) {
-            \Storage::disk('public')->delete($item->image);
+            Storage::disk('public')->delete($item->image);
 
             $image = $request['image'];
             $file = $image->store('wardrobe', 'public');
