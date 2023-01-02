@@ -30,7 +30,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/apapaya
 
-#COPY . /var/www/apapaya
+COPY . /var/www/apapaya
 RUN rm -rf /var/www/apapaya/node_modules
 
 #RUN mkdir /var/www/storage
