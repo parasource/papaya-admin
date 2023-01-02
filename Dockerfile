@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -30,10 +30,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/apapaya
 
-COPY . /var/www/apapaya
+#COPY . /var/www/apapaya
 RUN rm -rf /var/www/apapaya/node_modules
 
-RUN mkdir /var/www/storage
+#RUN mkdir /var/www/storage
 RUN chmod -R 755 /var/www
 RUN usermod -u 1000 www-data
 RUN chown -R 1000:1000 /var/www
