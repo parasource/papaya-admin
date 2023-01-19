@@ -1,8 +1,9 @@
+@php use Diglactic\Breadcrumbs\Breadcrumbs; @endphp
 @extends('layouts.app')
 
 @section('content')
 
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.wardrobe-items.index') }}
+    {{ Breadcrumbs::render('admin.wardrobe-items.index') }}
 
     @include('admin._nav', ['route' => 'wardrobe'])
 
@@ -30,7 +31,18 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="category_id" class="col-form-label">Категории</label>
+                            <label for="sex" class="col-form-label">Пол</label>
+                            <select class="form-select" name="sex" id="sex">
+                                <option value=""></option>
+                                @foreach($sexList as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="category_id" class="col-form-label">Категория</label>
                             <select class="form-select" name="category_id" id="category_id">
                                 <option value=""></option>
                                 @foreach($categories as $category)
@@ -66,7 +78,9 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td><a href="{{ route('admin.wardrobe-items.show', $item) }}">{{ $item->name }}</a></td>
-                <td><a href="{{ route('admin.wardrobe-categories.show', $item->category) }}">{{ $item->category->name }}</a></td>
+                <td>
+                    <a href="{{ route('admin.wardrobe-categories.show', $item->category) }}">{{ $item->category->name }}</a>
+                </td>
                 <td>
                     <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
                 </td>

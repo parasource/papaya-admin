@@ -9,9 +9,8 @@ use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use App\Services\Adviser;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -239,7 +238,8 @@ class LooksController extends Controller
         $categories = WardrobeCategory::all();
 
         $ids = $look->items()->pluck('wardrobe_items.id')->toArray();
-        $query = WardrobeItem::orderByDesc('id')->whereNotIn('id', $ids);
+        $query = WardrobeItem::orderByDesc('id')
+            ->whereIn('sex', [$look->sex, 'unisex'])->whereNotIn('id', $ids);
 
         if (!empty($value = $request->get('id'))) {
             $query->where('id', $value);

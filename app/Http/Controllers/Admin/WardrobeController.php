@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\ItemURL;
-use App\Models\Look;
 use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +17,6 @@ use Intervention\Image\Facades\Image;
 
 class WardrobeController extends Controller
 {
-
     public function index(Request $request)
     {
         $categories = WardrobeCategory::all();
@@ -32,13 +29,22 @@ class WardrobeController extends Controller
         if (!empty($value = $request->get('name'))) {
             $query->where('name', 'like', '%' . $value . '%');
         }
+        if (!empty($value = $request->get('sex'))) {
+            $query->where('sex', $value);
+        }
         if (!empty($value = $request->get('category_id'))) {
             $query->where('wardrobe_category_id', $value);
         }
 
         $items = $query->paginate(20);
 
-        return view('admin.wardrobe-items.index', compact('items', 'categories'));
+        $sexList = [
+            'male' => 'Муж.',
+            'female' => 'Жен.',
+            'unisex' => 'Унисекс'
+        ];
+
+        return view('admin.wardrobe-items.index', compact('items', 'categories', 'sexList'));
     }
 
 

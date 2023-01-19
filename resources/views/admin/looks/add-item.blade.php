@@ -1,12 +1,13 @@
+@php use Diglactic\Breadcrumbs\Breadcrumbs; @endphp
 @extends('layouts.app')
 
 @section('content')
 
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.looks.items-add', $look) }}
+    {{ Breadcrumbs::render('admin.looks.items-add', $look) }}
 
     @include('admin._nav', ['route' => 'looks'])
 
-    <img height="250" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
+    <img class="my-3" height="250" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
 
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>
@@ -72,9 +73,9 @@
             </tr>
         @endforeach
 
-        {{ $items->links() }}
-
         </tbody>
     </table>
+
+    {{ $items->links() }}
 
 @endsection
