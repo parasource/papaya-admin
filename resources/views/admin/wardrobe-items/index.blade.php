@@ -70,6 +70,7 @@
             <th>Категория</th>
             <th>Картинка</th>
             <th>Пол</th>
+            <th>Кол-во ссылок</th>
         </tr>
         </thead>
         <tbody>
@@ -83,6 +84,12 @@
                 </td>
                 <td>
                     <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+                </td>
+                <td>
+                    {{ $item->getSex() }}
+                </td>
+                <td>
+                    {{ $item->urls_count }}
                 </td>
             </tr>
         @endforeach

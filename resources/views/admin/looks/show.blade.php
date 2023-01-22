@@ -42,6 +42,25 @@
     </table>
 
     <div class="card">
+        <div class="card-header">Статистика</div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Количество лайков</th>
+                    <td>{{ $look->likes()->count() }}</td>
+                </tr>
+                <tr>
+                    <th>Количество дизлайков</th>
+                    <td>{{ $look->dislikes()->count() }}</td>
+                </tr>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-header">Айтемы</div>
         <div class="card-body">
             <div class="my-3">

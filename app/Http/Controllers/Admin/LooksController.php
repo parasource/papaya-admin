@@ -235,7 +235,7 @@ class LooksController extends Controller
 
     public function addItems(Request $request, Look $look)
     {
-        $categories = WardrobeCategory::all();
+        $categories = WardrobeCategory::all()->sortBy('name');
 
         $ids = $look->items()->pluck('wardrobe_items.id')->toArray();
         $query = WardrobeItem::orderByDesc('id')

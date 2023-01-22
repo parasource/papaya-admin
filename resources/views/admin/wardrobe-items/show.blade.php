@@ -23,6 +23,10 @@
             <td>{{ $item->id }}</td>
         </tr>
         <tr>
+            <th>Пол</th>
+            <td>{{ $item->getSex() }}</td>
+        </tr>
+        <tr>
             <th>Название</th>
             <td>{{ $item->name }}</td>
         </tr>

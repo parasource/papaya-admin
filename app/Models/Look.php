@@ -63,6 +63,16 @@ class Look extends Model
         return $this->belongsToMany(Tag::class, 'look_tags', 'look_id', 'tag_id');
     }
 
+    public function likes()
+    {
+        return $this->belongsToMany(AppUser::class, 'liked_looks', 'look_id', 'user_id');
+    }
+
+    public function dislikes()
+    {
+        return $this->belongsToMany(AppUser::class, 'disliked_looks', 'look_id', 'user_id');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'look_categories', 'look_id', 'category_id');

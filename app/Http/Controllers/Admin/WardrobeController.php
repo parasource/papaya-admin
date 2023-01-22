@@ -19,9 +19,9 @@ class WardrobeController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = WardrobeCategory::all();
+        $categories = WardrobeCategory::all()->sortBy('name');
 
-        $query = WardrobeItem::orderByDesc('id');
+        $query = WardrobeItem::orderByDesc('id')->withCount('urls');
 
         if (!empty($value = $request->get('id'))) {
             $query->where('id', $value);

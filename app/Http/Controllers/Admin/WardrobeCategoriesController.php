@@ -60,12 +60,7 @@ class WardrobeCategoriesController extends Controller
         return redirect()->route('admin.wardrobe-categories.show', $wardrobeCategory);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\WardrobeCategory  $wardrobeCategory
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(WardrobeCategory $wardrobeCategory)
     {
         $wardrobeCategory->update([

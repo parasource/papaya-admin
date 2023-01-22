@@ -30,7 +30,21 @@
         <div class="col">
             <div class="card mx-2 my-2">
                 <div class="card-body">
-                    <div class="card-title">Всего образов добавлено</div>
+                    <div class="card-title">Топ образов по количеству лайков</div>
+                    <div class="card-body">
+                        @foreach($topLooks as $look)
+                            <div class="row bg-light p-2 mt-2 border-dark border-1">
+                                <div class=""
+                                     style="width: 50px; height: 75px; background-image: url('https://static.papaya.parasource.tech{{ $look->image_resized }}'); background-size: cover"></div>
+                                <div class="col">
+                                    <a href="{{ route('admin.looks.show', $look) }}">{{ $look->name }}</a>
+                                </div>
+                                <div class="col">
+                                    {{ $look->likes_count }}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,8 +63,8 @@
                 'Образы с > 4 айтемами',
             ],
             datasets: [{
-                label: 'Male',
-                data: [{{ $maleLooksWithoutItems }}, {{ $maleLooksWithNotEnoughItems }}, {{ $maleLooksWithItems }}],
+                label: 'Мужские образы',
+                data: [{{ $maleLooks['without_items'] }}, {{ $maleLooks['with_not_enough_items'] }}, {{ $maleLooks['with_items'] }}],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
@@ -76,8 +90,8 @@
                 'Образы с > 4 айтемами',
             ],
             datasets: [{
-                label: 'Female',
-                data: [{{ $femaleLooksWithoutItems }}, {{ $femaleLooksWithNotEnoughItems }}, {{ $femaleLooksWithItems }}],
+                label: 'Женские образы',
+                data: [{{ $femaleLooks['without_items'] }}, {{ $femaleLooks['with_not_enough_items'] }}, {{ $femaleLooks['with_items'] }}],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
