@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TopicsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -97,6 +98,7 @@ Route::group([
     Route::resource("/wardrobe-items", WardrobeController::class)->parameters(['wardrobe-items' => 'item']);
     Route::resource('/wardrobe-categories', WardrobeCategoriesController::class)->middleware('can:admin');
 
+    Route::resource('/settings', SettingsController::class)->middleware('can:admin');
 
     Route::resource("users", UsersController::class)->middleware('can:admin')->except(['create', 'store']);
     Route::resource("staff", StaffController::class)->middleware('can:admin')->parameters(['staff' => 'user']);

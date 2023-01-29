@@ -5,15 +5,16 @@
 use App\Models\AppUser;
 use App\Models\Category;
 use App\Models\Look;
+use App\Models\Setting;
 use App\Models\Topic;
 use App\Models\User;
 use App\Models\WardrobeCategory;
 use App\Models\WardrobeItem;
 use Diglactic\Breadcrumbs\Breadcrumbs;
+use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
 //  with `$trail`. This is nice for IDE type checking and completion.
-use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 
 Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail) {
@@ -150,4 +151,17 @@ Breadcrumbs::for('admin.wardrobe-categories.show', function (BreadcrumbTrail $tr
 Breadcrumbs::for('admin.wardrobe-categories.edit', function (BreadcrumbTrail $trail, WardrobeCategory $category) {
     $trail->parent('admin.wardrobe-categories.show', $category);
     $trail->push('Редактировать', route('admin.wardrobe-categories.edit', $category));
+});
+
+
+Breadcrumbs::for('admin.settings.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Настройки', route('admin.settings.index'));
+});
+Breadcrumbs::for('admin.settings.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.settings.index');
+    $trail->push('Создать', route('admin.settings.create'));
+});
+Breadcrumbs::for('admin.settings.edit', function (BreadcrumbTrail $trail, Setting $setting) {
+    $trail->parent('admin.settings.index');
+    $trail->push('Редактировать ' . $setting->key, route('admin.settings.edit', $setting));
 });
