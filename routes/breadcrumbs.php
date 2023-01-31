@@ -165,3 +165,16 @@ Breadcrumbs::for('admin.settings.edit', function (BreadcrumbTrail $trail, Settin
     $trail->parent('admin.settings.index');
     $trail->push('Редактировать ' . $setting->key, route('admin.settings.edit', $setting));
 });
+
+
+Breadcrumbs::for('admin.notifications.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Настройки', route('admin.notifications.index'));
+});
+Breadcrumbs::for('admin.notifications.broadcast', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.notifications.index');
+    $trail->push('Рассылка', route('admin.notifications.broadcast'));
+});
+Breadcrumbs::for('admin.notifications.send', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.notification.index');
+    $trail->push('Сообщение', route('admin.notifications.send'));
+});

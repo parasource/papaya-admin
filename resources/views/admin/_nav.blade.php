@@ -16,5 +16,7 @@
                                 href="{{ route('admin.staff.index') }}">Стафф</a></li>
         <li class="nav-item"><a class="nav-link {{ ($route == 'settings')?'active':'' }}"
                                 href="{{ route('admin.settings.index') }}">Настройки</a></li>
+        <li class="nav-item"><a class="nav-link {{ ($route == 'notifications')?'active':'' }}"
+                                href="{{ route('admin.notifications.index') }}">Уведомления</a></li>
     @endcan
 </ul>

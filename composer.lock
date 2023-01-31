@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bc1f31fda3c3abaefe8c6c410537e79",
+    "content-hash": "ff2a06ecc2477bc0a836a4065c5f1030",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1075,6 +1075,48 @@
                 }
             ],
             "time": "2022-09-10T18:51:20+00:00"
+        },
+        {
+            "name": "duccio/apns-php",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/immobiliare/ApnsPHP.git",
+                "reference": "43e706e82236da2ece6e4932f63268298e5a7e83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/immobiliare/ApnsPHP/zipball/43e706e82236da2ece6e4932f63268298e5a7e83",
+                "reference": "43e706e82236da2ece6e4932f63268298e5a7e83",
+                "shasum": ""
+            },
+            "require": {
+                "lib-openssl": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "ApnsPHP/Autoload.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Apple Push Notification & Feedback Provider",
+            "homepage": "https://github.com/immobiliare/ApnsPHP",
+            "keywords": [
+                "apns",
+                "apple",
+                "notification",
+                "push"
+            ],
+            "support": {
+                "issues": "https://github.com/immobiliare/ApnsPHP/issues",
+                "source": "https://github.com/immobiliare/ApnsPHP/tree/master"
+            },
+            "time": "2016-02-07T21:17:51+00:00"
         },
         {
             "name": "egulias/email-validator",

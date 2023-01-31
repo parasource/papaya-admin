@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\NotificationsController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TopicsController;
@@ -102,5 +103,21 @@ Route::group([
 
     Route::resource("users", UsersController::class)->middleware('can:admin')->except(['create', 'store']);
     Route::resource("staff", StaffController::class)->middleware('can:admin')->parameters(['staff' => 'user']);
+
+    Route::group([
+        'prefix' => 'notifications',
+        'as' => 'notifications.',
+        'middleware' => ['can:admin']
+    ], function () {
+
+        Route::get('/', [NotificationsController::class, 'index'])->name('index');
+
+        Route::get('/broadcast', [NotificationsController::class, 'broadcast'])->name('broadcast');
+        Route::post('/broadcast', [NotificationsController::class, 'broadcastPost'])->name('broadcast');
+
+        Route::get('/send', [NotificationsController::class, 'send'])->name('send');
+        Route::post('/send', [NotificationsController::class, 'sendPost'])->name('send');
+
+    });
 
 });

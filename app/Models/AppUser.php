@@ -15,7 +15,7 @@ class AppUser extends Model
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'email', 'sex', 'mood', 'email_notifications', 'push_notifications'
+        'name', 'email', 'sex', 'mood', 'email_notifications', 'push_notifications', 'apns_token'
     ];
 
     public function getSex()
