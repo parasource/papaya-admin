@@ -7,6 +7,7 @@
     @include('admin._nav', ['route' => 'settings'])
 
     <form action="{{ route('admin.settings.update', $setting) }}" method="POST">
+        @method('PUT')
         @csrf
 
         <div class="form-group">
