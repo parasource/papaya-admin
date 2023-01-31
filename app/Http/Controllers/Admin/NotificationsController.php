@@ -27,7 +27,7 @@ class NotificationsController extends Controller
         ]);
 
         $client = new Client([
-            'base_uri' => 'http://127.0.0.1:8201'
+            'base_uri' => 'http://jobs:8201'
         ]);
         $res = $client->request("POST", "/apns/broadcast", [
             RequestOptions::JSON => [
