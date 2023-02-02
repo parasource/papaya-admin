@@ -37,8 +37,18 @@
 
                 <div class="form-group my-3">
                     <label for="image" class="col-form-label">Картинка</label>
-                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror" name="image">
+                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror"
+                           name="image">
                     @error('image')
+                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="tags" class="col-form-label">Теги (через запятую)</label>
+                    <textarea name="tags" id="tags" class="form-control @error('tags') is-invalid @enderror" id="tags"
+                              rows="5">{{ old('tags') }}</textarea>
+                    @error('tags')
                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>

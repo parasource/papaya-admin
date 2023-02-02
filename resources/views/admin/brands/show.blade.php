@@ -29,7 +29,7 @@
         <tr>
             <th>Картинка</th>
             <td>
-                <img src="https://static.papaya.parasource.tech/{{ $brand->image }}" alt="">
+                <img height="450" src="https://static.papaya.parasource.tech/{{ $brand->image }}">
             </td>
         </tr>
         <tbody>

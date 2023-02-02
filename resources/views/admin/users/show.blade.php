@@ -34,17 +34,37 @@
             <td>{{ $user->getSex() }}</td>
         </tr>
         <tr>
-            <th>Настроение</th>
-            <td>{{ $user->mood }}</td>
+            <th>Зарегистрировался</th>
+            <td>{{ $user->created_at->format('H:i d.m.Y') }}</td>
         </tr>
         <tr>
-            <th>Аватар</th>
-            <td>
-                <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="">
-            </td>
+            <th>Включены уведомления</th>
+            <td>{{ $user->push_notifications? 'Да': 'Нет' }}</td>
         </tr>
         <tbody>
         </tbody>
     </table>
+
+    <div class="card">
+        <div class="card-header">Сводка</div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Количество вещей в гардеробе</th>
+                    <td>{{ $user->wardrobe()->count() }}</td>
+                </tr>
+                <tr>
+                    <th>Количество лайкнутых образов</th>
+                    <td>{{ $user->liked_looks()->count() }}</td>
+                </tr>
+                <tr>
+                    <th>Количество дизлайкнутых образов</th>
+                    <td>{{ $user->disliked_looks()->count() }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 @endsection

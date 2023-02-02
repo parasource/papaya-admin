@@ -64,14 +64,16 @@ class WardrobeController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'string', Rule::in(array_keys(WardrobeItem::sexList()))],
             'category_id' => ['required', 'numeric', Rule::in($categories)],
-            'image' => ['required', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
+            'image' => ['required', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg'],
+            'tags' => ['required', 'string', 'max:500']
         ]);
 
         $item = WardrobeItem::create([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
             'sex' => $request['sex'],
-            'wardrobe_category_id' => $request['category_id']
+            'wardrobe_category_id' => $request['category_id'],
+            'tags' => $request['tags']
         ]);
 
         $image = $request['image'];
@@ -114,14 +116,16 @@ class WardrobeController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'string', Rule::in(array_keys(WardrobeItem::sexList()))],
             'category_id' => ['required', 'numeric'],
-            'image' => ['nullable', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg']
+            'image' => ['nullable', 'image', 'max:10240', 'mimes:webp,png,jpg,jpeg'],
+            'tags' => ['required', 'string', 'max:500'],
         ]);
 
         $item->update([
             'name' => $request['name'],
             'slug' => Str::slug($request['name']),
             'sex' => $request['sex'],
-            'wardrobe_category_id' => $request['category_id']
+            'wardrobe_category_id' => $request['category_id'],
+            'tags' => $request['tags']
         ]);
 
         if ($request['image']) {

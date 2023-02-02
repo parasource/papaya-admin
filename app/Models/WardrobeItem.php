@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class WardrobeItem extends Model
@@ -14,7 +13,7 @@ class WardrobeItem extends Model
     protected $table = 'wardrobe_items';
 
     protected $fillable = [
-        'name', 'slug', 'sex', 'wardrobe_category_id', 'image'
+        'name', 'slug', 'sex', 'wardrobe_category_id', 'image', 'tags'
     ];
 
     public $timestamps = false;

@@ -14,12 +14,7 @@ class NotificationsController extends Controller
         return view('admin.notifications.index');
     }
 
-    public function broadcast()
-    {
-        return view('admin.notifications.broadcast');
-    }
-
-    public function broadcastPost(Request $request)
+    public function broadcast(Request $request)
     {
         $this->validate($request, [
             'title' => ['required', 'string'],
@@ -44,68 +39,4 @@ class NotificationsController extends Controller
         return redirect()->back()
             ->with('error', 'Возникла ошибка при отправлении рассылки. См логи сервиса jobs');
     }
-
-    public function send()
-    {
-        return view('admin.notifications.send');
-    }
-
-    public function sendPost(Request $request)
-    {
-
-    }
-}
-
-function send_apns_push($pemfile, $passphrase, $title, $text, $deviceToken, $badge = null, $params = null)
-{
-    $response = array();
-
-    ////////////////////////////////////////////////////////////////////////////////
-    $ctx = stream_context_create();
-    stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfile);
-    stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
-
-    // Open a connection to the APNS server
-    $fp = stream_socket_client('ssl://gateway.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
-
-    if (!$fp) {
-        exit("Failed to connect: $err $errstr" . PHP_EOL);
-    }
-
-    // Create the payload body
-    $body['aps'] = array(
-        'alert' => [
-            'title' => $title,
-            'body' => $text
-        ],
-        'sound' => 'default',
-        'badge' => $badge
-    );
-
-    if ($params) {
-        foreach ($params as $key => $value) {
-            $body[$key] = $value;
-        }
-    }
-
-    // Encode the payload as JSON
-    $payload = json_encode($body);
-
-    // Build the binary notification
-    $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
-
-    // Send it to the server
-    $result = fwrite($fp, $msg, strlen($msg));
-
-    if (!$result) {
-        $response['log'] = 'Message not delivered' . PHP_EOL;
-
-    } else {
-        $response['log'] = 'Message successfully delivered' . PHP_EOL;
-    }
-
-    // Close the connection to the server
-    fclose($fp);
-
-    return $response;
 }

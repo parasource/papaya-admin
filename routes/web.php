@@ -111,12 +111,7 @@ Route::group([
     ], function () {
 
         Route::get('/', [NotificationsController::class, 'index'])->name('index');
-
-        Route::get('/broadcast', [NotificationsController::class, 'broadcast'])->name('broadcast');
-        Route::post('/broadcast', [NotificationsController::class, 'broadcastPost'])->name('broadcast');
-
-        Route::get('/send', [NotificationsController::class, 'send'])->name('send');
-        Route::post('/send', [NotificationsController::class, 'sendPost'])->name('send');
+        Route::post('/broadcast', [NotificationsController::class, 'broadcast'])->name('broadcast');
 
     });
 

@@ -37,8 +37,12 @@
         <tr>
             <th>Картинка</th>
             <td>
-                <img src="https://static.papaya.parasource.tech{{$item->image}}" alt="">
+                <img height="450" src="https://static.papaya.parasource.tech{{$item->image}}">
             </td>
+        </tr>
+        <tr>
+            <th>Теги</th>
+            <td>{{ $item->tags }}</td>
         </tr>
         <tbody>
         </tbody>

@@ -64,7 +64,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->getSex() }}</td>
                 <td>{{ $user->mood }}</td>
-                <td>{{ $user->created_at->format('d-m-Y') }}</td>
+                <td>{{ $user->created_at->format('d.m.Y') }}</td>
             </tr>
         @endforeach
 

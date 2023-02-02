@@ -6,9 +6,24 @@
 
     @include('admin._nav', ['route' => 'notifications'])
 
-    <div class="my-3">
-        <a href="{{ route('admin.notifications.broadcast') }}" class="btn btn-primary">Рассылка</a>
-        <a href="{{ route('admin.notifications.send') }}" class="btn btn-primary">Сообщение</a>
-    </div>
+    <h2>Рассылка всем пользователям</h2>
+
+    <form action="{{ route('admin.notifications.broadcast') }}" method="post">
+        @csrf
+
+        <div class="form-group mt-3">
+            <label for="title">Заголовок</label>
+            <input type="text" id="title" class="form-control" name="title" value="{{ old('title') }}">
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="text">Текст</label>
+            <textarea name="text" class="form-control" id="text" rows="5">{{ old('text') }}</textarea>
+        </div>
+
+        <div class="form-group mt-3">
+            <button class="btn btn-success">Отправить</button>
+        </div>
+    </form>
 
 @endsection

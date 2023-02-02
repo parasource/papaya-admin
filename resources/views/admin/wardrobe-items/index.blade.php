@@ -69,6 +69,7 @@
             <th>Название</th>
             <th>Категория</th>
             <th>Картинка</th>
+            <th>Теги</th>
             <th>Пол</th>
             <th>Кол-во ссылок</th>
         </tr>
@@ -84,6 +85,9 @@
                 </td>
                 <td>
                     <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+                </td>
+                <td>
+                    {{ Str::limit($item->tags) }}
                 </td>
                 <td>
                     {{ $item->getSex() }}

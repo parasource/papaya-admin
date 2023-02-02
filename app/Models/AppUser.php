@@ -22,4 +22,19 @@ class AppUser extends Model
     {
         return $this->sex == self::SEX_MALE ? "Мужчина" : "Женщина";
     }
+
+    public function wardrobe()
+    {
+        return $this->belongsToMany(WardrobeItem::class, 'users_wardrobe', 'user_id', 'wardrobe_item_id');
+    }
+
+    public function liked_looks()
+    {
+        return $this->belongsToMany(Look::class, 'liked_looks', 'user_id', 'look_id');
+    }
+
+    public function disliked_looks()
+    {
+        return $this->belongsToMany(Look::class, 'disliked_looks', 'user_id', 'look_id');
+    }
 }
