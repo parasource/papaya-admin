@@ -19,7 +19,7 @@
             <th>ID</th>
             <th>Заголовок</th>
             <th>Slug</th>
-            <th>Текст</th>
+            <th>Опубликована</th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +33,9 @@
                 </td>
                 <td>{{ $article->title }}</td>
                 <td>{{ $article->slug }}</td>
-                <td>{!! $article->text !!}</td>
+                <td>
+                    {{ $article->updated_at->format('d.m.Y H:i') }}
+                </td>
             </tr>
         @endforeach
 

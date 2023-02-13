@@ -29,7 +29,7 @@
         <tr>
             <th>Обложка</th>
             <td>
-                <img height="450" src="{{ Storage::disk('public')->url($article->cover) }}">
+                <img height="450" src="https://static.papaya.parasource.tech/{{ $article->cover }}">
             </td>
         </tr>
         <tbody>
