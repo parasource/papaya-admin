@@ -19,4 +19,6 @@
         <li class="nav-item"><a class="nav-link {{ ($route == 'notifications')?'active':'' }}"
                                 href="{{ route('admin.notifications.index') }}">Уведомления</a></li>
     @endcan
+    <li class="nav-item"><a class="nav-link {{ ($route == 'articles')?'active':'' }}"
+                            href="{{ route('admin.articles.index') }}">Статьи</a></li>
 </ul>

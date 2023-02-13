@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticlesController;
 use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
@@ -114,5 +115,7 @@ Route::group([
         Route::post('/broadcast', [NotificationsController::class, 'broadcast'])->name('broadcast');
 
     });
+
+    Route::resource('articles', ArticlesController::class)->middleware(['can:moderator']);
 
 });

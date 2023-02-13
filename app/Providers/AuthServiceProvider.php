@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
         Gate::define('moderator', function (User $user) {
-            return $user->isModerator();
+            return $user->isModerator() || $user->isAdmin();
         });
     }
 }

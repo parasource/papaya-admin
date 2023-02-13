@@ -3,6 +3,7 @@
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
 use App\Models\AppUser;
+use App\Models\Article;
 use App\Models\Category;
 use App\Models\Look;
 use App\Models\Setting;
@@ -177,4 +178,20 @@ Breadcrumbs::for('admin.notifications.broadcast', function (BreadcrumbTrail $tra
 Breadcrumbs::for('admin.notifications.send', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.notification.index');
     $trail->push('Сообщение', route('admin.notifications.send'));
+});
+
+Breadcrumbs::for('admin.articles.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Статьи', route('admin.articles.index'));
+});
+Breadcrumbs::for('admin.articles.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.articles.index');
+    $trail->push('Создать', route('admin.articles.create'));
+});
+Breadcrumbs::for('admin.articles.show', function (BreadcrumbTrail $trail, Article $article) {
+    $trail->parent('admin.articles.index');
+    $trail->push($article->title, route('admin.articles.show', $article));
+});
+Breadcrumbs::for('admin.articles.edit', function (BreadcrumbTrail $trail, Article $article) {
+    $trail->parent('admin.articles.show', $article);
+    $trail->push('Редактировать', route('admin.articles.edit', $article));
 });
