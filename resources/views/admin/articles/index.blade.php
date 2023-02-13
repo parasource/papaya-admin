@@ -18,6 +18,7 @@
         <tr>
             <th>ID</th>
             <th>Заголовок</th>
+            <th>Slug</th>
             <th>Текст</th>
         </tr>
         </thead>
@@ -31,7 +32,8 @@
                     </a>
                 </td>
                 <td>{{ $article->title }}</td>
-                <td>{{ $article->text }}</td>
+                <td>{{ $article->slug }}</td>
+                <td>{!! $article->text !!}</td>
             </tr>
         @endforeach
 

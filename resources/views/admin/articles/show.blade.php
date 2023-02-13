@@ -4,8 +4,8 @@
     @include('admin._nav', ['route' => 'articles'])
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.articles.edit', $brand) }}" class="btn btn-primary mx-2">Изменить</a>
-        <form method="POST" action="{{ route('admin.articles.destroy', $brand) }}">
+        <a href="{{ route('admin.articles.edit', $article) }}" class="btn btn-primary mx-2">Изменить</a>
+        <form method="POST" action="{{ route('admin.articles.destroy', $article) }}">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger mx-2">Удалить</button>
