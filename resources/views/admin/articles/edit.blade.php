@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.articles.update', $article) }}
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.articles.edit', $article) }}
 
     @include('admin._nav', ['route' => 'articles'])
 
