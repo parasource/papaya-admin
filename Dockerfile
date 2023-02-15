@@ -38,12 +38,20 @@ RUN chmod -R 755 /var/www
 RUN usermod -u 1000 www-data
 RUN chown -R 1000:1000 /var/www
 
-ENV DEBIAN_FRONTEND noninteractive.
-RUN apt-get install -y language-pack-ru
-ENV LANGUAGE ru_RU.UTF-8
+RUN apt-get update && apt-get install -y locales
+# Locale
+RUN sed -i -e \
+  's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen \
+   && locale-gen
+
 ENV LANG ru_RU.UTF-8
+ENV LANGUAGE ru_RU:ru
+ENV LC_LANG ru_RU.UTF-8
 ENV LC_ALL ru_RU.UTF-8
-RUN locale-gen ru_RU.UTF-8 && dpkg-reconfigure locales
+
+# +Timezone (если надо на этапе сборки)
+ENV TZ Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
 RUN /usr/bin/composer install --ignore-platform-req=ext-http
