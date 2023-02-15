@@ -20,7 +20,7 @@
 
         <div class="form-group mt-3">
             <label class="col-form-label" for="text">Текст</label>
-            <textarea name="text" id="text" rows="10">{!! old('text', $article->title) !!}</textarea>
+            <textarea name="text" id="text" rows="10">{!! old('text', $article->text) !!}</textarea>
         </div>
 
         <div class="form-group">
