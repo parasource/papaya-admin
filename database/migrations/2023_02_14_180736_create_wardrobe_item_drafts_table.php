@@ -14,6 +14,7 @@ return new class extends Migration {
 
             $table->string('name');
             $table->string('image');
+            $table->string('category');
             $table->string('status')->default(WardrobeItemDraft::STATUS_DRAFT);
             $table->string('sex');
 

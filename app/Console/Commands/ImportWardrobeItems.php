@@ -26,6 +26,7 @@ class ImportWardrobeItems extends Command
                 'name' => $name,
                 'sex' => $sex === 'men' ? 'male' : 'female',
                 'status' => WardrobeItemDraft::STATUS_DRAFT,
+                'category' => $category
             ]);
 
             $imageName = md5($fileName . time());
