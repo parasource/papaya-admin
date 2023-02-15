@@ -38,6 +38,14 @@ RUN chmod -R 755 /var/www
 RUN usermod -u 1000 www-data
 RUN chown -R 1000:1000 /var/www
 
+ENV DEBIAN_FRONTEND noninteractive.
+RUN apt-get install -y language-pack-ru
+ENV LANGUAGE ru_RU.UTF-8
+ENV LANG ru_RU.UTF-8
+ENV LC_ALL ru_RU.UTF-8
+RUN locale-gen ru_RU.UTF-8 && dpkg-reconfigure locales
+
+
 RUN /usr/bin/composer install --ignore-platform-req=ext-http
 
 #ENTRYPOINT ["/var/www/apapaya/migrate.sh"]

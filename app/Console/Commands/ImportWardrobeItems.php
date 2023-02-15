@@ -13,7 +13,7 @@ class ImportWardrobeItems extends Command
 
     public function handle()
     {
-        $path = "/var/www/storage/";
+        $path = "/var/www/imports/";
         $category = $this->argument("category");
 
         $files = array_diff(scandir($path . $category), array('.', '..'));
