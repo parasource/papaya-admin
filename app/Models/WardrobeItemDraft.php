@@ -14,7 +14,7 @@ class WardrobeItemDraft extends Model
     protected $table = 'wardrobe_item_drafts';
 
     protected $fillable = [
-        'name', 'image', 'sex', 'status'
+        'name', 'image', 'sex', 'status', 'category'
     ];
 
     public function getStatus()
