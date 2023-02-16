@@ -4,9 +4,15 @@
     @include('admin._nav', ['route' => 'moderation-step-1'])
 
     <div class="card">
-        <div class="card-header">Соответствует ли фото названию вещи?</div>
+        <div class="card-header">Носят ли сейчас эту вещь и соответствует ли она своему названию?</div>
         <div class="card-body">
-            <b>Категория: {{ $item->category }}</b>
+            <p>
+                Категория: {{ $item->category }}
+            </p>
+            <p>
+                <b>Название: {{ $item->name }}</b>
+            </p>
+            <br>
             <img src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
 
             <form action="{{ route('admin.moderation-step-1.approve', $item) }}" method="POST">
