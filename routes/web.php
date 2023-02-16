@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LooksController;
+use App\Http\Controllers\Admin\ModerationController;
 use App\Http\Controllers\Admin\NotificationsController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StaffController;
@@ -118,4 +119,16 @@ Route::group([
 
     Route::resource('articles', ArticlesController::class)->middleware(['can:moderator']);
 
+
+    Route::group([
+        'prefix' => 'moderation-step-1',
+        'as' => 'moderation-step-1.',
+        'middleware' => ['can:moderator']
+    ], function () {
+
+        Route::get('/', [ModerationController::class, 'step1'])->name('index');
+        Route::post('/{item}/approve', [ModerationController::class, 'step1Approve'])->name('approve');
+        Route::post('/{item}/decline', [ModerationController::class, 'step1Decline'])->name('decline');
+
+    });
 });

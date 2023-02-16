@@ -21,4 +21,6 @@
     @endcan
     <li class="nav-item"><a class="nav-link {{ ($route == 'articles')?'active':'' }}"
                             href="{{ route('admin.articles.index') }}">Статьи</a></li>
+    <li class="nav-item"><a class="nav-link {{ ($route == 'moderation-step-1')?'active':'' }}"
+                            href="{{ route('admin.moderation-step-1.index') }}">Модерация 1</a></li>
 </ul>
