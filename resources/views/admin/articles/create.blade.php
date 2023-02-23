@@ -10,6 +10,18 @@
         @csrf
 
         <div class="form-group">
+            <label for="sex" class="col-form-label">Пол</label>
+            <select class="form-control" name="sex" id="sex">
+                @foreach($sex as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
+            @error('sex')
+            <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label for="title" class="col-form-label">Заголовок</label>
             <input id="title" class="form-control @error('title') is-invalid @enderror" name="title"
                    value="{{ old('title') }}" required>
