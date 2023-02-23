@@ -7,11 +7,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
 
-class NotificationsController extends Controller
+class PushController extends Controller
 {
     public function index()
     {
-        return view('admin.notifications.index');
+        return view('admin.push.index');
     }
 
     public function broadcast(Request $request)
@@ -32,7 +32,7 @@ class NotificationsController extends Controller
         ]);
 
         if ($res->getStatusCode() == 200) {
-            return redirect()->route('admin.notifications.index')
+            return redirect()->route('admin.push.index')
                 ->with('success', 'Рассылка успешно начата');
         }
 

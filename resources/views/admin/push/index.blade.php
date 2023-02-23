@@ -2,13 +2,13 @@
 
 @section('content')
 
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.notifications.index') }}
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.push.index') }}
 
-    @include('admin._nav', ['route' => 'notifications'])
+    @include('admin._nav', ['route' => 'push'])
 
     <h2>Рассылка всем пользователям</h2>
 
-    <form action="{{ route('admin.notifications.broadcast') }}" method="post">
+    <form action="{{ route('admin.push.broadcast') }}" method="post">
         @csrf
 
         <div class="form-group mt-3">
@@ -25,4 +25,5 @@
             <button class="btn btn-success">Отправить</button>
         </div>
     </form>
+
 @endsection

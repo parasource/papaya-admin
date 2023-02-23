@@ -8,6 +8,7 @@
 
     <form action="{{ route('admin.articles.update', $article) }}" enctype="multipart/form-data" method="POST">
         @csrf
+        @method('PUT')
 
         <div class="form-group">
             <label for="title" class="col-form-label">Заголовок</label>

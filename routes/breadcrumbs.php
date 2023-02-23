@@ -168,16 +168,16 @@ Breadcrumbs::for('admin.settings.edit', function (BreadcrumbTrail $trail, Settin
 });
 
 
-Breadcrumbs::for('admin.notifications.index', function (BreadcrumbTrail $trail) {
-    $trail->push('Настройки', route('admin.notifications.index'));
+Breadcrumbs::for('admin.push.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Настройки', route('admin.push.index'));
 });
-Breadcrumbs::for('admin.notifications.broadcast', function (BreadcrumbTrail $trail) {
-    $trail->parent('admin.notifications.index');
-    $trail->push('Рассылка', route('admin.notifications.broadcast'));
+Breadcrumbs::for('admin.push.broadcast', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.push.index');
+    $trail->push('Рассылка', route('admin.push.broadcast'));
 });
-Breadcrumbs::for('admin.notifications.send', function (BreadcrumbTrail $trail) {
-    $trail->parent('admin.notification.index');
-    $trail->push('Сообщение', route('admin.notifications.send'));
+Breadcrumbs::for('admin.push.send', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.push.index');
+    $trail->push('Сообщение', route('admin.push.send'));
 });
 
 Breadcrumbs::for('admin.articles.index', function (BreadcrumbTrail $trail) {

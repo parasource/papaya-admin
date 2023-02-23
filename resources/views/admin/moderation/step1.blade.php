@@ -17,11 +17,11 @@
 
             <form action="{{ route('admin.moderation-step-1.approve', $item) }}" method="POST">
                 @csrf
-                <button class="btn btn-success w-100 my-3">Заебись</button>
+                <button class="btn btn-success w-100 my-3">Оставляем</button>
             </form>
             <form action="{{ route('admin.moderation-step-1.decline', $item) }}" method="POST">
                 @csrf
-                <button class="btn btn-danger w-100 mt-1">Не заебись</button>
+                <button class="btn btn-danger w-100 mt-1">Убираем</button>
             </form>
         </div>
     </div>

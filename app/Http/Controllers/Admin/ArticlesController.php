@@ -32,7 +32,7 @@ class ArticlesController extends Controller
         $this->validate($request, [
             'title' => ['required', 'string', 'max:255'],
             'text' => ['required', 'string'],
-            'cover' => ['required', 'image', 'mimes:jpg,png,jpeg,webp']
+            'cover' => ['nullable', 'image', 'mimes:jpg,png,jpeg,webp']
         ]);
 
         $article->update([
