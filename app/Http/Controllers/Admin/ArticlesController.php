@@ -24,7 +24,8 @@ class ArticlesController extends Controller
 
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', compact('article'));
+        $sex = Article::sexList();
+        return view('admin.articles.edit', compact('article', 'sex'));
     }
 
     public function update(Request $request, Article $article)
@@ -73,7 +74,8 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        return view('admin.articles.create');
+        $sex = Article::sexList();
+        return view('admin.articles.create', compact('sex'));
     }
 
     public function destroy(Article $article)
