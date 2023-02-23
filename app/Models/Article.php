@@ -12,7 +12,7 @@ class Article extends Model
     protected $table = 'articles';
 
     protected $fillable = [
-        'title', 'slug', 'text', 'cover'
+        'title', 'slug', 'text', 'cover', 'sex'
     ];
 
     public static function sexList()
