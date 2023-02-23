@@ -7,7 +7,7 @@
         <div class="card-header">Носят ли сейчас эту вещь и соответствует ли она своему названию?</div>
         <div class="card-body">
             <p>
-                Категория: {{ $item->category }}
+                Пол: {{ $item->sex == 'male'? 'Муж.' : 'Жен.' }}
             </p>
             <p>
                 <b>Название: {{ $item->name }}</b>
