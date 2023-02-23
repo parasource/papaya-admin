@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Look;
+use App\Models\WardrobeItemDraft;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,11 @@ class HomeController extends Controller
         ];
 
         $topLooks = Look::whereNull('deleted_at')->withCount('likes')->orderBy('likes_count')->limit(3)->get();
-//        dd($topLooks);
+        $itemsModeration = [
+            'yes' => WardrobeItemDraft::where('status', '!=', WardrobeItemDraft::STATUS_DRAFT)->count(),
+            'no' => WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_DRAFT)->count()
+        ];
 
-        return view('admin.index', compact('maleLooks', 'femaleLooks', 'topLooks'));
+        return view('admin.index', compact('maleLooks', 'femaleLooks', 'topLooks', 'itemsModeration'));
     }
 }
