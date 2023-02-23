@@ -2,16 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasFactory;
+    public const SEX_MALE = 'male';
+    public const SEX_FEMALE = 'female';
 
     protected $table = 'articles';
 
     protected $fillable = [
         'title', 'slug', 'text', 'cover'
     ];
+
+    public static function sexList()
+    {
+        return [
+            self::SEX_MALE => 'Муж.',
+            self::SEX_FEMALE => 'Жен.'
+        ];
+    }
+
+    public function getSex()
+    {
+        return self::sexList()[$this->sex];
+    }
 }

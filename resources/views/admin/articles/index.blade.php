@@ -19,6 +19,7 @@
             <th>ID</th>
             <th>Заголовок</th>
             <th>Slug</th>
+            <th>Пол</th>
             <th>Опубликована</th>
         </tr>
         </thead>
@@ -33,6 +34,7 @@
                 </td>
                 <td>{{ $article->title }}</td>
                 <td>{{ $article->slug }}</td>
+                <td>{{ $article->getSex() }}</td>
                 <td>
                     {{ $article->updated_at->format('d.m.Y H:i') }}
                 </td>

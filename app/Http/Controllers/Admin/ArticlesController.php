@@ -32,12 +32,14 @@ class ArticlesController extends Controller
         $this->validate($request, [
             'title' => ['required', 'string', 'max:255'],
             'text' => ['required', 'string'],
+            'sex' => ['required', 'string'],
             'cover' => ['nullable', 'image', 'mimes:jpg,png,jpeg,webp']
         ]);
 
         $article->update([
             'title' => $request['title'],
             'text' => $request['text'],
+            'sex' => $request['sex']
         ]);
 
         if ($request['cover']) {
@@ -54,6 +56,7 @@ class ArticlesController extends Controller
         $this->validate($request, [
             'title' => ['required', 'string', 'max:255'],
             'text' => ['required', 'string'],
+            'sex' => ['required', 'string'],
             'cover' => ['required', 'image', 'mimes:jpg,png,jpeg,webp']
         ]);
 
@@ -61,6 +64,7 @@ class ArticlesController extends Controller
             'title' => $request['title'],
             'slug' => Str::slug($request['title']),
             'text' => $request['text'],
+            'sex' => $request['sex'],
             'cover' => $request['cover']->store('articles', 'public')
         ]);
 

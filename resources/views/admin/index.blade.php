@@ -30,20 +30,9 @@
         <div class="col">
             <div class="card mx-2 my-2">
                 <div class="card-body">
-                    <div class="card-title">Топ образов по количеству лайков</div>
-                    <div class="card-body">
-                        @foreach($topLooks as $look)
-                            <div class="row bg-light p-2 mt-2 border-dark border-1">
-                                <div class=""
-                                     style="width: 50px; height: 75px; background-image: url('https://static.papaya.parasource.tech{{ $look->image_resized }}'); background-size: cover"></div>
-                                <div class="col">
-                                    <a href="{{ route('admin.looks.show', $look) }}">{{ $look->name }}</a>
-                                </div>
-                                <div class="col">
-                                    {{ $look->likes_count }}
-                                </div>
-                            </div>
-                        @endforeach
+                    <div class="card-title">Фильтрация айтемов</div>
+                    <div>
+                        <canvas id="items-moderation-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -106,6 +95,31 @@
             config = {
                 type: 'doughnut',
                 data: femaleData,
+                options: {}
+            }
+        );
+
+        const itemsModerationData = {
+            labels: [
+                'Отфильтрованые айтемы',
+                'Неотфильтрованые айтемы',
+            ],
+            datasets: [{
+                label: 'Кол-во айтемов',
+                data: [{{ $itemsModeration['yes'] }}, {{ $itemsModeration['no'] }}],
+                backgroundColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 6
+            }]
+        }
+
+        const itemsModerationChart = new Chart(
+            document.getElementById('items-moderation-chart'),
+            config = {
+                type: 'doughnut',
+                data: itemsModerationData,
                 options: {}
             }
         );
