@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WardrobeItemDraft;
-use Illuminate\Http\Request;
 
 class ModerationController extends Controller
 {
@@ -30,5 +29,11 @@ class ModerationController extends Controller
         ]);
 
         return redirect()->route('admin.moderation-step-1.index');
+    }
+
+    public function step1Approved()
+    {
+        $items = WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_APPROVED)->orderBy('id', 'DESC')->paginate();
+        return view('admin.moderation.step1-approved', compact('items'));
     }
 }

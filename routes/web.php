@@ -108,6 +108,8 @@ Route::group([
         Route::get('/', [ModerationController::class, 'step1'])->name('index');
         Route::post('/{item}/approve', [ModerationController::class, 'step1Approve'])->name('approve');
         Route::post('/{item}/decline', [ModerationController::class, 'step1Decline'])->name('decline');
+
+        Route::get('/approved', [ModerationController::class, 'step1Approved'])->name('approved');
     });
 
     Route::resource('alerts', AlertsController::class)

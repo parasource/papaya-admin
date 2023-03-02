@@ -3,6 +3,10 @@
 @section('content')
     @include('admin._nav', ['route' => 'moderation-step-1'])
 
+    <div class="my-3">
+        <a href="{{ route('admin.moderation-step-1.approved') }}" class="btn btn-success">Посмотреть одобренные</a>
+    </div>
+
     <div class="card">
         <div class="card-header">Носят ли сейчас эту вещь и соответствует ли она своему названию?</div>
         <div class="card-body">
