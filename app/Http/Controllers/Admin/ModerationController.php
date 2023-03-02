@@ -33,7 +33,9 @@ class ModerationController extends Controller
 
     public function step1Approved()
     {
-        $items = WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_APPROVED)->orderBy('id', 'DESC')->paginate();
+        $items = WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_APPROVED)
+            ->orderBy('updated_at', 'DESC')
+            ->paginate();
         return view('admin.moderation.step1-approved', compact('items'));
     }
 }
