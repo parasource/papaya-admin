@@ -9,7 +9,7 @@ class ModerationController extends Controller
 {
     public function step1()
     {
-        $item = WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_DRAFT)->orderBy('id', 'DESC')->first();
+        $item = WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_APPROVED)->orderBy('id', 'ASC')->first();
         return view('admin.moderation.step1', compact('item'));
     }
 
