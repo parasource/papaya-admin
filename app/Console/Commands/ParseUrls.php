@@ -23,7 +23,7 @@ class ParseUrls extends Command
                 $body = json_decode($res->body(), true);
 
                 foreach ($body as $bodyItem) {
-                    $brand = Brand::where('name', ucfirst($bodyItem['brand']));
+                    $brand = Brand::where('name', ucfirst($bodyItem['brand']))->first();
                     if (!$brand) {
                         $brand = Brand::create([
                             'name' => ucfirst($bodyItem['brand']),
