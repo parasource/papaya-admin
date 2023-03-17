@@ -20,26 +20,28 @@ class ParseUrls extends Command
             $res = Http::get("http://parser:5101/$sex/find/$item->name");
 
             if ($res->status() == 200) {
-                $body = json_decode($res->body());
+                $body = json_decode($res->body(), true);
 
-                $brand = Brand::where('name', ucfirst($item->category->id));
-                if (!$brand) {
-                    $brand = Brand::create([
-                        'name' => ucfirst($body['brand']),
-                        'slug' => Str::slug($body['brand']),
-                        'image' => ' '
+                foreach ($body as $bodyItem) {
+                    $brand = Brand::where('name', ucfirst($bodyItem['brand']));
+                    if (!$brand) {
+                        $brand = Brand::create([
+                            'name' => ucfirst($bodyItem['brand']),
+                            'slug' => Str::slug($bodyItem['brand']),
+                            'image' => ' '
+                        ]);
+
+                        $this->info("brand $brand->name created");
+                    }
+
+                    $url = ItemURL::create([
+                        'url' => $bodyItem['url'],
+                        'item_id' => $item->id,
+                        'brand_id' => $brand->id
                     ]);
 
-                    $this->info("brand $brand->name created");
+                    $this->info("url {$url->url} added");
                 }
-
-                $url = ItemURL::create([
-                    'url' => $body['url'],
-                    'item_id' => $item->id,
-                    'brand_id' => $brand->id
-                ]);
-
-                $this->info("url {$url->url} added");
             }
         }
 
