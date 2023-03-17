@@ -15,7 +15,7 @@ class ImportNewWardrobe extends Command
     public function handle()
     {
         foreach (WardrobeItemDraft::where('status', WardrobeItemDraft::STATUS_APPROVED)->cursor() as $draftItem) {
-            $category = WardrobeCategory::where('name', $draftItem->category)->get();
+            $category = WardrobeCategory::where('name', $draftItem->category)->first();
             if (!$category) {
                 $category = WardrobeCategory::create([
                     'name' => $draftItem->category,
