@@ -20,9 +20,10 @@ class GenerateBrandLogos extends Command
         $max_len = 20;
         $font_size = 102;
         $font_height = 50;
-        $img = Image::canvas($width, $height, '#ffffff');
 
         foreach (Brand::where('image', ' ')->cursor() as $brand) {
+            $img = Image::canvas($width, $height, '#ffffff');
+
             $text = $brand->name;
 
             $filename = md5($brand->name . time()) . ".webp";
