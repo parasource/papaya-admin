@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\WardrobeItem;
+use App\Models\ItemURL;
 use Illuminate\Console\Command;
 
 class FixUrls extends Command
@@ -12,7 +12,7 @@ class FixUrls extends Command
 
     public function handle()
     {
-        foreach (WardrobeItem::where('url', 'like', '%market%')->cursor() as $url) {
+        foreach (ItemURL::where('url', 'like', '%market%')->cursor() as $url) {
             $url = "https://" . substr($url, 4, strpos($url, "?") - 4);
             $this->info($url);
         }
