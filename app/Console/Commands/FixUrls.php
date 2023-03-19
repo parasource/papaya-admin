@@ -13,7 +13,7 @@ class FixUrls extends Command
     public function handle()
     {
         foreach (ItemURL::where('url', 'like', '%redav%')->cursor() as $url) {
-            $leftHalf = "https://" . substr($url->url, strpos($url, "https://"), strlen($url->url) - strpos($url, "?"));
+            $leftHalf = substr($url->url, strpos($url, "https://"), strlen($url->url) - strpos($url, "?"));
             $urlStr = substr($leftHalf, 0, strpos($leftHalf, "&subid"));
             $this->info($urlStr);
         }

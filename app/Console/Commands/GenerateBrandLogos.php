@@ -17,11 +17,11 @@ class GenerateBrandLogos extends Command
         $height = 1000;
         $center_x = $width / 2;
         $center_y = $height / 2;
-        $max_len = 20;
-        $font_size = 102;
-        $font_height = 50;
+        $max_len = 14;
+        $font_size = 146;
+        $font_height = 65;
 
-        foreach (Brand::where('image', ' ')->cursor() as $brand) {
+        foreach (Brand::where('id', '>', 98)->cursor() as $brand) {
             $img = Image::canvas($width, $height, '#ffffff');
 
             $text = $brand->name;
