@@ -21,7 +21,7 @@ class GenerateBrandLogos extends Command
         $font_size = 146;
         $font_height = 65;
 
-        foreach (Brand::where('img', ' ')->cursor() as $brand) {
+        foreach (Brand::where('image', ' ')->cursor() as $brand) {
             $img = Image::canvas($width, $height, '#ffffff');
 
             $text = $brand->name;
