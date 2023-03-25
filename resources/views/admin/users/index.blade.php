@@ -71,5 +71,5 @@
         </tbody>
     </table>
 
-    {{ $users->append(request()->query())->links() }}
+    {{ $users->withQueryString()->links() }}
 @endsection

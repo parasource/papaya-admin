@@ -74,6 +74,6 @@
         </tbody>
     </table>
 
-    {{ $looks->links() }}
+    {{ $looks->withQueryString()->links() }}
 
 @endsection

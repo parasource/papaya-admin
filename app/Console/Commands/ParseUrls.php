@@ -15,7 +15,7 @@ class ParseUrls extends Command
 
     public function handle()
     {
-        foreach (WardrobeItem::cursor() as $item) {
+        foreach (WardrobeItem::where('wardrobe_category_id', 84)->cursor() as $item) {
             $sex = $item->sex == 'unisex' ? 'male' : $item->sex;
             $res = Http::get("http://parser:5101/$sex/find/$item->name");
 

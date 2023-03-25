@@ -102,6 +102,6 @@
         </tbody>
     </table>
 
-    {{ $items->append(request()->query())->links() }}
+    {{ $items->withQueryString()->links() }}
 
 @endsection
