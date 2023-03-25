@@ -15,7 +15,7 @@
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>
         <div class="card-body">
-            <form action="?" method="GET">
+            <form action="" method="GET">
                 <div class="row">
                     <div class="col-sm-1">
                         <div class="form-group">
@@ -35,7 +35,8 @@
                             <select class="form-select" name="sex" id="sex">
                                 <option value=""></option>
                                 @foreach($sexList as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
+                                    <option
+                                        value="{{ $key }}" {{ request('sex') == $key? 'selected':'' }}>{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -46,14 +47,14 @@
                             <select class="form-select" name="category_id" id="category_id">
                                 <option value=""></option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option
+                                        value="{{ $category->id }}" {{ request('category_id') == $category->id? 'selected':'' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-1">
                         <div class="form-group">
-                            <label class="col-form-label">&nbsp;</label><br/>
                             <button type="submit" class="btn btn-primary">Найти</button>
                         </div>
                     </div>
@@ -101,6 +102,6 @@
         </tbody>
     </table>
 
-    {{ $items->links() }}
+    {{ $items->append(request()->query())->links() }}
 
 @endsection
