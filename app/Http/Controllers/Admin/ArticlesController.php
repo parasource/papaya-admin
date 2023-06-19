@@ -39,7 +39,7 @@ class ArticlesController extends Controller
         ]);
 
         $article->update([
-            'author' => $request['title'],
+            'author' => $request['author'],
             'title' => $request['title'],
             'text' => $request['text'],
             'sex' => $request['sex']
