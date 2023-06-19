@@ -22,6 +22,15 @@
         </div>
 
         <div class="form-group">
+            <label for="author" class="col-form-label">Автор</label>
+            <input id="author" class="form-control @error('author') is-invalid @enderror" name="author"
+                   value="{{ old('author') }}" required>
+            @error('author')
+            <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label for="title" class="col-form-label">Заголовок</label>
             <input id="title" class="form-control @error('title') is-invalid @enderror" name="title"
                    value="{{ old('title') }}" required>

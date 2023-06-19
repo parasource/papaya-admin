@@ -17,6 +17,7 @@
         <thead>
         <tr>
             <th>ID</th>
+            <th>Автор</th>
             <th>Заголовок</th>
             <th>Slug</th>
             <th>Пол</th>
@@ -32,6 +33,7 @@
                         {{ $article->title }}
                     </a>
                 </td>
+                <td>{{ $article->author }}</td>
                 <td>{{ $article->title }}</td>
                 <td>{{ $article->slug }}</td>
                 <td>{{ $article->getSex() }}</td>
