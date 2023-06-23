@@ -34,7 +34,7 @@
         <tr>
             <th>Картинка</th>
             <td>
-                <img height="450" src="https://static.papaya.parasource.tech{{ $look->image_resized }}" alt="">
+                <img height="450" src="https://static.papaya.pw{{ $look->image_resized }}" alt="">
             </td>
         </tr>
         <tbody>
@@ -82,7 +82,7 @@
                         <td>{{ $item->id }}</td>
                         <td><a href="{{ route('admin.looks.show', $item) }}">{{ $item->name }}</a></td>
                         <td>
-                            <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+                            <img height="150" src="https://static.papaya.pw{{ $item->image }}" alt="">
                         </td>
                         <td>
                             <form action="{{ route('admin.looks.items.remove', compact('look', 'item')) }}"

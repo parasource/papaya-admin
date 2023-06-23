@@ -17,7 +17,7 @@
                 <b>Название: {{ $item->name }}</b>
             </p>
             <br>
-            <img src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+            <img src="https://static.papaya.pw{{ $item->image }}" alt="">
 
             <form action="{{ route('admin.moderation-step-1.approve', $item) }}" method="POST">
                 @csrf

@@ -37,7 +37,7 @@
         <tr>
             <th>Картинка</th>
             <td>
-                <img height="450" src="https://static.papaya.parasource.tech{{$item->image}}">
+                <img height="450" src="https://static.papaya.pw{{$item->image}}">
             </td>
         </tr>
         <tr>

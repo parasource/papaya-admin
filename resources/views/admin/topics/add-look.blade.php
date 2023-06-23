@@ -63,7 +63,7 @@
                 <td>{{ $look->slug }}</td>
                 <td>{{ $look->desc }}</td>
                 <td>
-                    <img height="250" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
+                    <img height="250" src="https://static.papaya.pw{{ $look->image }}" alt="">
                 </td>
                 <td>{{ $look->created_at->format('d-m-Y') }}</td>
                 <td>

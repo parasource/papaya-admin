@@ -65,7 +65,7 @@
                 <td>{{ $look->slug }}</td>
                 <td>{{ $look->desc }}</td>
                 <td>
-                    <img height="200" src="https://static.papaya.parasource.tech{{ $look->image_resized }}" alt="">
+                    <img height="200" src="https://static.papaya.pw{{ $look->image_resized }}" alt="">
                 </td>
                 <td>{{ $look->items()->count() }}</td>
             </tr>

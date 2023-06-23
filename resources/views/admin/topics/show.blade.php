@@ -22,17 +22,21 @@
             <th>ID</th><td>{{ $topic->id }}</td>
         </tr>
         <tr>
-            <th>Название</th><td>{{ $topic->name }}</td>
+            <th>Название</th>
+            <td>{{ $topic->name }}</td>
         </tr>
         <tr>
-            <th>Slug</th><td>{{ $topic->slug }}</td>
+            <th>Slug</th>
+            <td>{{ $topic->slug }}</td>
         </tr>
         <tr>
-            <th>Описание</th><td>{{ $topic->desc }}</td>
+            <th>Описание</th>
+            <td>{{ $topic->desc }}</td>
         </tr>
         <tr>
-            <th>Картинка</th><td>
-                <img height="450" src="https://static.papaya.parasource.tech{{$topic->image}}" alt="">
+            <th>Картинка</th>
+            <td>
+                <img height="450" src="https://static.papaya.pw{{$topic->image}}" alt="">
             </td>
         </tr>
         <tbody>

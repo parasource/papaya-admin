@@ -7,7 +7,7 @@
 
     @include('admin._nav', ['route' => 'looks'])
 
-    <img class="my-3" height="250" src="https://static.papaya.parasource.tech{{ $look->image }}" alt="">
+    <img class="my-3" height="250" src="https://static.papaya.pw{{ $look->image }}" alt="">
 
     <div class="card mb-3">
         <div class="card-header">Фильтр</div>
@@ -64,7 +64,7 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td><a href="{{ route('admin.wardrobe-items.show', $item) }}">{{ $item->name }}</a></td>
-                <td><img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt=""></td>
+                <td><img height="150" src="https://static.papaya.pw{{ $item->image }}" alt=""></td>
                 <td>
                     <form action="{{ route('admin.looks.items.add', compact('look', 'item')) }}" method="post">
                         @csrf

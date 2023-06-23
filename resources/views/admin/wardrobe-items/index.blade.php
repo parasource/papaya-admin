@@ -85,7 +85,7 @@
                     <a href="{{ route('admin.wardrobe-categories.show', $item->category) }}">{{ $item->category->name }}</a>
                 </td>
                 <td>
-                    <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+                    <img height="150" src="https://static.papaya.pw{{ $item->image }}" alt="">
                 </td>
                 <td>
                     {{ Str::limit($item->tags) }}

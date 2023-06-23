@@ -24,7 +24,7 @@
                     {{ $item->category }}
                 </td>
                 <td>
-                    <img height="150" src="https://static.papaya.parasource.tech{{ $item->image }}" alt="">
+                    <img height="150" src="https://static.papaya.pw{{ $item->image }}" alt="">
                 </td>
                 <td>
                     {{ $item->sex == 'male'? 'Муж.' : 'Жен.' }}

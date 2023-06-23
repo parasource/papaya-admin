@@ -29,7 +29,7 @@
         <tr>
             <th>Обложка</th>
             <td>
-                <img height="450" src="https://static.papaya.parasource.tech/{{ $article->cover }}">
+                <img height="450" src="https://static.papaya.pw/{{ $article->cover }}">
             </td>
         </tr>
         <tbody>
